@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>inspector-v2</title>
+    <link rel="stylesheet" href="/index.css" type="text/css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://unpkg.com/grimoirejs-preset-basic@1.10.18/register/grimoire-preset-basic.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <div id="header"> </div>
+    <div id="tool-body"></div>
+    <script src="/dist/build.js"></script>
+    <script type="text/sort" typeName="testMat">
+    @Pass{
+       FS_PREC(mediump,float)
+       @import "basic-vert"
+       #ifdef FS
+          uniform float _time;
+          @{default:0.2}
+          uniform float speed;
+        @{default:"yellow",type:"color"}
+          uniform vec3 color;
+          void main(){
+             gl_FragColor = abs(vec4(sin(_time/1000. * speed + vTexCoord.x),cos(_time/1000.*speed + vTexCoord.y),0.5,1));
+             gl_FragColor.rgb *= color;
+          }
+       #endif
+    }
+    </script>
+    <script type="text/goml">
+        <goml>
+          <scene>
+            <camera>
+              <camera.components>
+                  <MouseCameraControl/>
+              </camera.components>
+            </camera>
+            <mesh geometry="cube" material="new(testMat)" position="2,0,0"/>
+            <mesh geometry="cube" material="new(testMat)" color="gray" speed="3" position="-2,0,0"/>
+          </scene>
+       </goml>
+    </script>
+  </body>
+</html>

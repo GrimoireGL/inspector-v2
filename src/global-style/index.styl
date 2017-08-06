@@ -1,0 +1,56 @@
+// Sizes
+
+tool-bar-height = 30px
+tool-bar-height-include-border = tool-bar-height + 4px
+element-search-box-height = 30px
+
+font-size-smaller = 12px
+font-size-small = 14px
+font-size-default = 16px
+font-size-large = 18px
+font-size-larger = 20px
+
+// Z-Order
+
+popup-z-index = 1000
+
+// Colors
+
+$colors = {
+  default:{
+    base:#F9F9F9,
+    color:#494949,
+    dark:#e3e3e3,
+    darker:#cccccc,
+    darker2:#B6B6B6
+    darkest:#9F9F9F
+  },
+  primary:{
+    base:#5940AC,
+    color:#F9F9F9,
+    dark:#513B9D,
+    darker:#49358D
+  },
+  info:{
+    base:#C6EBFF,
+    color:#494949,
+    dark:#B4D6E8,
+    daker:#A3C1D1
+  }
+}
+
+$col($type = "default", $tone = "base")
+  return $colors[$type][$tone];
+
+// Mixins
+
+textApparanceClear()
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
