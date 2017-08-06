@@ -2,7 +2,7 @@
   <div class="component-root-element-tree">
     <SearchBox/>
     <div class="node-container">
-      <ElementsTreeNodeElement :node="root" :indentLevel="0"/>
+      <ElementsTreeNodeElement :node="root" :indentLevel="0" structureId="0"/>
     </div>
   </div>
 </template>

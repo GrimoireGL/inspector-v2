@@ -3,7 +3,8 @@ import TreeElement from './TreeElement';
 import Vue from "vue";
 import ElementsTreeNodeElement from "./components/elements-tree-node.vue";
 import SearchBox from "./components/search-box.vue";
-@Component({components:{ElementsTreeNodeElement,SearchBox}})
+import ElementTreeStore from "./ElementTreeStore";
+@Component({components:{ElementsTreeNodeElement,SearchBox},store:ElementTreeStore})
 export default class ElementTree extends Vue {
   public root: TreeElement = {
     nodeName: "goml",

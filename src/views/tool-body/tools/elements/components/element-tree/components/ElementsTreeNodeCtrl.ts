@@ -10,12 +10,27 @@ export default class ElementsTreeNode extends Vue{
   @Prop()
   public indentLevel:number;
 
-  public open:boolean = false;
+  @Prop()
+  public structureId:string;
 
-  public selected:boolean = false;
+  public openByCaret:boolean = false;
 
   public get rootClass():string[]{
     return ["component-root-elements-tree-node",this.selected ? "selected":"unselected"];
+  }
+
+  public get filterEnabled():boolean{
+    return !this.$store.getters.hasQuery;
+  }
+
+  public get open():boolean{
+    let flag = this.openByCaret;
+    flag = this.$store.getters.hasQuery || flag;
+    return flag;
+  }
+
+  public get selected():boolean{
+    return this.structureId === this.$store.state.selectedNodeId
   }
 
   public get hasChildren():boolean{
@@ -28,6 +43,10 @@ export default class ElementsTreeNode extends Vue{
     };
   }
 
+  public get shown():boolean{
+    return !this.$store.getters.hasQuery || this.node.nodeName.indexOf(this.$store.state.query) > -1
+  }
+
   public get caretStyle():{[key:string]:any}{
     return {
       visibility:this.hasChildren?"visible":"hidden"
@@ -35,14 +54,15 @@ export default class ElementsTreeNode extends Vue{
   }
 
   public get caretClass():string[]{
-    return ["fa","fa-fw",this.open?"fa-caret-down":"fa-caret-right"];
+    return ["fa","fa-fw",this.openByCaret?"fa-caret-down":"fa-caret-right"];
   }
 
   public toggleOpenState():void{
-    this.open = !this.open;
+    this.openByCaret = !this.openByCaret;
   }
 
   public selectNode():void{
-    this.selected = true;
+    this.$store.commit("selectNode",this.structureId);
+    //this.selected = true;
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div :class="rootClass">
-    <p @click="selectNode"><span class="indent" :style="indentStyle"/><i @click.stop="toggleOpenState" :style="caretStyle" :class="caretClass"></i><span class="bracket">&lt; </span><span class="node-name">{{node.nodeName}}</span><span class="bracket"> &gt;</span></p>
-    <ElementsTreeNode v-if="open"  v-for="(child,index) in node.children" :node="child" :indentLevel="indentLevel + 1" :key="index"/>
+    <p @click="selectNode" v-if="shown"><span v-if="filterEnabled" class="indent" :style="indentStyle"/><i @click.stop="toggleOpenState" v-if="filterEnabled" :style="caretStyle" :class="caretClass"></i><span class="bracket">&lt; </span><span class="node-name">{{node.nodeName}}</span><span class="bracket"> &gt;</span></p>
+    <ElementsTreeNode v-if="open"  v-for="(child,index) in node.children" :structureId="structureId + '-' + index"  :node="child" :indentLevel="indentLevel + 1" :key="index"/>
   </div>
 </template>
 

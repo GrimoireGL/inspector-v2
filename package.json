@@ -16,8 +16,7 @@
     "vue": "^2.3.3",
     "vue-class-component": "^5.0.2",
     "vue-property-decorator": "^5.1.1",
-    "vuex": "^2.3.1",
-    "vuex-typescript": "^0.1.0"
+    "vuex": "^2.3.1"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
