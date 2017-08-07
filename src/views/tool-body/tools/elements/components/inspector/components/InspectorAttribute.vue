@@ -1,6 +1,10 @@
 <template>
   <div class="component-root-inspector-attribute">
-    <p v-if="visibleByFilter"><span class="attribute-name">{{attributeName}}</span><span class="separator">:</span><span class="attribute-value">{{target.stringifiedValue}}</span></p>
+    <p v-if="visibleByFilter"><span class="attribute-name" @click="toggle">{{attributeName}}</span><span class="separator">:</span><span class="attribute-value"><component :is="readerComponent" :value="readerModel"></component></span></p>
+    <div class="editor-section" v-if="open">
+      <p class="converter-type"><i class="fa fa-exchange fa-fw"/>{{converterTypeName}}<span class="separator"></span><i class="fa fa-paper-plane fa-fw"/><component :is="readerComponent" :value="defaultValueReaderModel"></component></p>
+      <component :is="editorComponent" :value="editorModel"/>
+    </div>
   </div>
 </template>
 
@@ -20,6 +24,12 @@
         &:hover
           color $col("default","color")
           cursor pointer
+  .editor-section
+    margin 0px 0px 0px 5px
+    border-left solid 1px $col("default","dark")
+  .converter-type
+    font-size font-size-smaller
+    color $col("info","dark")
   .attribute-name
     color $col("default","darker2")
     &:hover

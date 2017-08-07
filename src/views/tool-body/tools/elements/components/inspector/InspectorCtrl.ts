@@ -4,6 +4,9 @@ import InspectorHeader from "./components/InspectorHeader.vue";
 import InspectorComponent from "./components/InspectorComponent.vue";
 import InspectionData from "./components/InspectionData";
 import InspectorStore from "./InspectorStore";
+import StringSerializable from "../../../../../../common/serializables/StringSerializable";
+import BooleanSerializable from "../../../../../../common/serializables/BooleanSerializable";
+
 @Component({components:{InspectorHeader,InspectorComponent},store:InspectorStore})
 export default class Inspector extends Vue{
   public target:InspectionData = {
@@ -14,15 +17,21 @@ export default class Inspector extends Vue{
         attributes:[
           {
             attributeFQN:"core.GrimoireComponent.id",
-            stringifiedValue:"test"
+            obtainedAttributeValue:new StringSerializable("test"),
+            defaultValue:new StringSerializable("default"),
+            converterType:"core.String"
           },
           {
             attributeFQN:"core.GrimoireComponent.class",
-            stringifiedValue:"test2"
+            obtainedAttributeValue:new StringSerializable("test2"),
+            defaultValue:new StringSerializable("default"),
+            converterType:"core.String"
           },
           {
             attributeFQN:"core.GrimoireComponent.enabled",
-            stringifiedValue:"True"
+            obtainedAttributeValue:new BooleanSerializable(true),
+            defaultValue:new BooleanSerializable(false),
+            converterType:"core.Boolean"
           }
         ]
       }
