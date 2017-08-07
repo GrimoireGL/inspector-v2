@@ -3,7 +3,8 @@ import Component from 'vue-class-component'
 import InspectorHeader from "./components/InspectorHeader.vue";
 import InspectorComponent from "./components/InspectorComponent.vue";
 import InspectionData from "./components/InspectionData";
-@Component({components:{InspectorHeader,InspectorComponent}})
+import InspectorStore from "./InspectorStore";
+@Component({components:{InspectorHeader,InspectorComponent},store:InspectorStore})
 export default class Inspector extends Vue{
   public target:InspectionData = {
     nodeFQN:"fundamental.goml",

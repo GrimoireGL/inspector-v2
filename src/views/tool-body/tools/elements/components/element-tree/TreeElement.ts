@@ -1,6 +1,6 @@
 import TreeAttribute from "./TreeAttribute";
 interface TreeElement{
-  nodeName:string;
+  nodeFQN:string;
   attributes:TreeAttribute[];
   children: TreeElement[];
 }

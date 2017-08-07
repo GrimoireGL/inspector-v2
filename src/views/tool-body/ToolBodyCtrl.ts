@@ -4,10 +4,10 @@ import {Prop} from "vue-property-decorator"
 import BodyTools from "./BodyToolRegistry";
 @Component({})
 export default class ToolBody extends Vue{
-
-  public currentState: string = "elements";
+  @Prop()
+  public currentTab: string;
 
   public get currentBody():typeof Vue {
-    return BodyTools[this.currentState];
+    return BodyTools[this.currentTab];
   }
 }

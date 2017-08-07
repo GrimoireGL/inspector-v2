@@ -21,5 +21,6 @@ export default class InspectorHeader extends Vue{
 
   public toggleSearchbox(){
     this.showSearchbox = !this.showSearchbox;
+    this.$store.commit("setQuery","");
   }
 }

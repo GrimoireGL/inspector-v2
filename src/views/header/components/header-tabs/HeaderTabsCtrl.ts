@@ -16,10 +16,6 @@ export default class HeaderTabs extends Vue{
     {
       header:"Animations",
       iconClass:"fa fa-magic"
-    },
-    {
-      header:"",
-      iconClass:"fa fa-cog"
     }
   ];
 }

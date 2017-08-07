@@ -1,30 +1,11 @@
 <template>
-  <div :class="containerClass">
+  <div :class="containerClass" @click="selectCurrentTab">
     <p><i :class="iconClass"></i>{{tabInfo.header}}</p>
   </div>
 </template>
 
-<script>
-import Vue from 'vue'
-import Component from 'vue-class-component'
-import TabElementData from "./TabElementData";
-import {Prop} from "vue-property-decorator";
-@Component({})
-export default class TabElement extends Vue{
-  @Prop()
-  public tabInfo: TabElementData;
+<script src="./TabElementCtrl">
 
-  @Prop()
-  public selected: boolean;
-
-  public get iconClass():string{
-    return this.tabInfo.iconClass;
-  }
-
-  public get containerClass():string{
-    return "component-root-tab-element" + (this.selected ? " selected":"");
-  }
-}
 </script>
 
 <style lang="stylus">

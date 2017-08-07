@@ -8,8 +8,20 @@ export default class InspectorComponent extends Vue{
   @Prop()
   public target:InspectionComponentData;
 
+  public open:boolean = true;
+
   public get componentName():string{
     const names = this.target.componentFQN.split(".");
     return names[names.length - 1];
   }
+
+  public get caretClass():string[]{
+    return ["fa fa-fw toggle-caret",this.open?"fa-caret-down":"fa-caret-right"];
+  }
+
+  public toggle():void{
+    this.open = !this.open;
+  }
+
+
 }

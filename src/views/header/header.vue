@@ -17,8 +17,14 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import RootSelector from "./components/root-selector/root-selector.vue";
 import HeaderTabs from "./components/header-tabs/header-tabs.vue";
-@Component({components:{RootSelector,HeaderTabs}})
+import HeaderStore from "./headerStore";
+@Component({components:{RootSelector,HeaderTabs},store:HeaderStore})
 export default class HeaderBelt extends Vue{
+  public mounted(){
+    this.$store.watch((state)=>state.currentTab,(tab)=>{
+      this.$emit("selectedTabChanged",tab);
+    });
+  }
 }
 </script>
 

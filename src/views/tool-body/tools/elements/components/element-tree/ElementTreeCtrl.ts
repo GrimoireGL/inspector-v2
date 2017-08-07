@@ -7,31 +7,31 @@ import ElementTreeStore from "./ElementTreeStore";
 @Component({components:{ElementsTreeNodeElement,SearchBox},store:ElementTreeStore})
 export default class ElementTree extends Vue {
   public root: TreeElement = {
-    nodeName: "goml",
+    nodeFQN: "fundamental.goml",
     attributes: [],
     children: [
       {
-        nodeName: "renderer",
+        nodeFQN: "fundamental.renderer",
         attributes: [],
         children: [
           {
-            nodeName: "render-scene",
+            nodeFQN: "fundamental.render-scene",
             attributes: [],
             children: []
           }
         ]
       },
       {
-        nodeName:"scene",
+        nodeFQN: "fundamental.scene",
         attributes: [],
         children: [
           {
-            nodeName:"camera",
+            nodeFQN: "fundamental.camera",
             attributes:[],
             children: []
           },
           {
-            nodeName:"mesh",
+            nodeFQN: "fundamental.mesh",
             attributes:[],
             children: []
           }

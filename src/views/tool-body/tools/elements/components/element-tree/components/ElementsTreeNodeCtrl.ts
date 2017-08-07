@@ -15,6 +15,11 @@ export default class ElementsTreeNode extends Vue{
 
   public openByCaret:boolean = false;
 
+  public get displayName():string{
+    const names = this.node.nodeFQN.split(".");
+    return names[names.length - 1];
+  }
+
   public get rootClass():string[]{
     return ["component-root-elements-tree-node",this.selected ? "selected":"unselected"];
   }
@@ -44,7 +49,7 @@ export default class ElementsTreeNode extends Vue{
   }
 
   public get shown():boolean{
-    return !this.$store.getters.hasQuery || this.node.nodeName.indexOf(this.$store.state.query) > -1
+    return !this.$store.getters.hasQuery || this.node.nodeFQN.indexOf(this.$store.state.query) > -1
   }
 
   public get caretStyle():{[key:string]:any}{
@@ -63,6 +68,5 @@ export default class ElementsTreeNode extends Vue{
 
   public selectNode():void{
     this.$store.commit("selectNode",this.structureId);
-    //this.selected = true;
   }
 }

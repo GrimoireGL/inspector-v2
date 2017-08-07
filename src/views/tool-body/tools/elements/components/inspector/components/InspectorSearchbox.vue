@@ -1,7 +1,7 @@
 <template>
   <div class="component-root-inspector-searchbox">
     <p><i class="fa fa-search fa-fw"/></p>
-    <input type="text" placeholder="Filter attributes"/>
+    <input ref="input" type="text" placeholder="Filter attributes" @input="onQueryChanged"/>
   </div>
 </template>
 
@@ -10,6 +10,13 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 @Component({})
 export default class InspectorSearchbox extends Vue{
+  public get queryValue():string{
+    return this.$store.state.query;
+  }
+
+  public onQueryChanged():void{
+    this.$store.commit("setQuery",(this.$refs.input as HTMLInputElement).value);
+  }
 }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="component-root-inspector-attribute">
-    <p><i class="visibility-toggle fa fa-eye-slash"/><span class="attribute-name">{{attributeName}}</span><span class="separator">:</span><span class="attribute-value">{{target.stringifiedValue}}</span></p>
+    <p v-if="visibleByFilter"><span class="attribute-name">{{attributeName}}</span><span class="separator">:</span><span class="attribute-value">{{target.stringifiedValue}}</span></p>
   </div>
 </template>
 
@@ -12,11 +12,7 @@
 @import "~gls/index.styl"
 .component-root-inspector-attribute
   p
-    margin 0px
-    .visibility-toggle
-      display inline-block
-      margin 0px 3px 0px 3px
-      visibility hidden
+    margin 0 10px
     &:hover
       .visibility-toggle
         visibility visible
