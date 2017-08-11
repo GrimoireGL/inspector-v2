@@ -5,7 +5,10 @@
     "moduleResolution":"node",
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
-    "strict":true
+    "strict":true,
+    "types":[
+      "chrome"
+    ]
   },
   "filesGlob": [
           "src/**/*.ts",

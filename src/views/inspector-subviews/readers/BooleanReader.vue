@@ -14,5 +14,4 @@ export default class BooleanReader extends Vue{
 </script>
 
 <style lang="stylus">
-.component-root-boolean-reader
 </style>

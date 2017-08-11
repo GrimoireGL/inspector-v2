@@ -1,44 +1,38 @@
+import AddRemoveMutationObserverWrapper from "./AddRemoveMutationObserverWrapper";
 import {EventEmitter} from "eventemitter3";
-export default class FrameObserver extends EventEmitter {
-  private _observers: Map<Window,MutationObserver> = new Map<Window,MutationObserver>();
+export default class FrameObserver extends EventEmitter{
 
-  public observe(window: Window): void {
-    if(!this._observers.has(window)){
-      this._observers.set(window,new MutationObserver(this._onObservingEvent.bind(this)));
-    }
-    this._observers.get(window)!.observe(window.document.body,{
-      attributes: true,
-      childList: true,
-      characterData: true
-    });
+  private _iframeObserver: AddRemoveMutationObserverWrapper<HTMLIFrameElement> = new AddRemoveMutationObserverWrapper<HTMLIFrameElement>("iframe");
+
+  private frames: HTMLIFrameElement[] = [];
+
+  constructor() {
+    super();
+    this._iframeObserver.on("added",this.onIFrameAdded.bind(this));
+    this._iframeObserver.on("removed",this.onIFrameRemoved.bind(this));
+    this._iframeObserver.observe();
   }
 
-  public disconnect(window: Window): void {
-    if(this._observers.has(window)){
-      this._observers.get(window)!.disconnect();
-    }
+  public sendMessageToFrames(message: string): void {
+    this.frames.forEach(f => f.contentWindow.postMessage(message, "*"));
   }
 
-  private _onObservingEvent(e: MutationRecord[]): void {
-    console.log(this._filterTag(e,"iframe",true).map((i:HTMLIFrameElement)=>i.contentWindow));
+  public onIFrameAdded(iframe: HTMLIFrameElement): void {
+    this.frames.push(iframe);
+    this.emit("added",iframe);
   }
 
-  private _filterTag(records: MutationRecord[],tagName: string, added: boolean): Element[] {
-    const result = [] as Element[];
-    for(let record of records){
-      let target = added ? record.addedNodes : record.removedNodes;
-      target.forEach(tag=>{
-        if(tag instanceof Element){
-          if(tag.tagName === tagName.toUpperCase()){
-            result.push(tag);
-          }
-          const queried = tag.getElementsByTagName(tagName);
-          for(let i = 0; i < queried.length; i++){
-            result.push(queried.item(i));
-          }
-        }
-      });
+  public onIFrameRemoved(iframe: HTMLIFrameElement): void {
+    const index = this.frames.indexOf(iframe);
+    this.frames.splice(index, 1);
+    this.emit("removed",iframe);
+  }
+
+  private _inIframe() {
+    try {
+      return window.self !== window.top;
+    } catch (e) {
+      return true;
     }
-    return result;
   }
 }
