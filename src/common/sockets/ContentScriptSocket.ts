@@ -25,7 +25,8 @@ export default class ContentScriptSocket extends BasicSocket{
    * Pass through to window
    * @param {Object} args [description]
    */
-  protected __onNonRegisteredMessage(args:Object):void{
+  protected __onNonRegisteredMessage(args:any):void{
+    args.$fromBackend = true;
     window.postMessage(args,"*");
   }
 }

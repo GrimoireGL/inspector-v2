@@ -1,8 +1,8 @@
 import ValueTypeHandler from "./ValueTypeHandler";
 import {Serializable} from "ts-serializer";
 import Vue from "vue";
-import StringReader from "../views/inspector-subviews/readers/StringReader.vue";
-import UnsupportedEditor from "../views/inspector-subviews/editors/UnsupportedEditor.vue";
+import StringReader from "../UI/view/inspector-subviews/readers/StringReader.vue";
+import UnsupportedEditor from "../UI/view/inspector-subviews/editors/UnsupportedEditor.vue";
 import StringSerializable from "./serializables/StringSerializable";
 export default class ValueTypeRegistry{
 

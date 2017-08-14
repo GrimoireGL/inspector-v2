@@ -4,3 +4,7 @@ html,body{
   margin: 0px;
   padding: 0px;
 }
+
+.devtool-container{
+  height: 300px
+}

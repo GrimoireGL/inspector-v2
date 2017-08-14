@@ -6,6 +6,7 @@ module.exports = {
     main:'./src/main.ts',
     devtool:'./src/devtool/devtool.ts',
     devtoolInit:'./src/devtool/devtoolInit.ts',
+    embed:"./src/embed/index.ts",
     contentScript:'./src/contentScript/index.ts',
     background:'./src/background/index.ts'
   },
@@ -44,7 +45,8 @@ module.exports = {
   resolve: {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      'gls': path.resolve(__dirname, 'src/global-style')
+      'gls': path.resolve(__dirname, 'src/UI/global-style'),
+      'res': path.resolve(__dirname,"src/resources")
     },
     extensions: ['.js','.ts']
   },

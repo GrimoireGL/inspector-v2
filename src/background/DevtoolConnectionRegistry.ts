@@ -1,4 +1,4 @@
-import IDevtoolMessage from "../common/IDevtoolMessage";
+import IDevtoolMessage from "../common/messages/IDevtoolMessage";
 /**
  * Store connections between background script and devtool
  */
@@ -42,6 +42,7 @@ export default class DevtoolConnectionRegistry{
   private _onMessage(message:IDevtoolMessage,port:chrome.runtime.Port):void{
     if(message.$tabId && message.$source === "grimoirejs-inspector-v2"){
       if(!this._establishedPorts[message.$tabId]){
+        // Memorize specified tabId is current port
         this._establishedPorts[message.$tabId] = port;
       }
       chrome.tabs.sendMessage(message.$tabId,message);
