@@ -1,5 +1,7 @@
 # inspector-v2
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/GrimoireGL/inspector-v2.svg)](https://greenkeeper.io/)
+
 > An awesome devtool for Grimoire.js
 
 ## Build Setup
