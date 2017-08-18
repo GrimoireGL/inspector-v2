@@ -2,7 +2,7 @@
   <div class="component-root-selector">
     <div class="control-root" @click.stop="clicked">
       <div class="selected-container">
-        <p>#canvas.holo1</p>
+        <p>{{selectedLabel}}</p>
       </div>
       <div class="spinner-container">
         <i class="fa fa-caret-down fa-fw"></i>
@@ -10,7 +10,7 @@
     </div>
     <div class="popup-root" v-if="expand">
       <div class="popup-container">
-        <WindowElement v-for="window in windows" :key="window.windowName" :windowInfo="window" @window-selector-hover="windowSelectorHover" @window-selector-out="windowSelectorOut"  @root-selector-mouseover="rootSelectorMouseover" @root-selector-mouseout="rootSelectorMouseout"/>
+        <WindowElement v-for="window in visibleWindows" :key="window.windowName" :windowInfo="window" @window-selector-hover="windowSelectorHover" @window-selector-out="windowSelectorOut"  @root-selector-mouseover="rootSelectorMouseover" @root-selector-mouseout="rootSelectorMouseout" @root-selector-click="rootSelectorClick"/>
       </div>
     </div>
   </div>

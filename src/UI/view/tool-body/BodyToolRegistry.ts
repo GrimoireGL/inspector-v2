@@ -1,4 +1,4 @@
-import Elements from "./tools/elements/elements.vue";
+import Elements from "../elements/elements.vue";
 import Vue from "vue";
 export default {
   elements:Elements

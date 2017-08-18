@@ -1,9 +1,9 @@
-import {Serializable} from "ts-serializer";
 interface InspectionAttributeData{
   attributeFQN:string;
   converterType:string;
-  defaultValue:Serializable;
-  obtainedAttributeValue:Serializable;
+  defaultValue:any;
+  obtainedAttributeValue:any;
+  errorText?:string;
 }
 
 export default InspectionAttributeData;

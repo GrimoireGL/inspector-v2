@@ -1,6 +1,6 @@
 /**
- * Server socket provide abstraction of connector instance used in inspecter.
- * This is browser window side instance to connect.
+ * Primitive functions to co-work with devtool window and actual browser window.
+ * These args should be JSON convertible objects.
  */
 interface ISocket{
   send(messageType:string,args:any):void;

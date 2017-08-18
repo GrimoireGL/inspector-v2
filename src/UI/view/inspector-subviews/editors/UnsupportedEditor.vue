@@ -1,6 +1,6 @@
 <template>
   <div class="component-root-unsupported-editor">
-    <p>There are no compatible editor for this converter.</p>
+    <p><i class="fa fa-fw fa-exclamation-triangle"/>Unsupported type</p>
   </div>
 </template>
 
@@ -15,6 +15,7 @@ export default class UnsupportedEditor extends Vue{
 <style lang="stylus">
 @import "~gls/index.styl"
 .component-root-unsupported-editor
-  font-size font-size-small
-  color $col("default","color")
+  color orange
+  p
+    margin 0px
 </style>

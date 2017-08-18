@@ -1,8 +1,9 @@
 import Vue from "vue";
 import {Serializable} from "ts-serializer";
-interface ValueTypeHandler<OriginalConvertedType,JSONConvertibleType extends Serializable,ReaderModel,EditorModel>{
+interface ValueTypeHandler<OriginalConvertedType,JSONConvertibleType,ReaderModel,EditorModel>{
   reader?: typeof Vue;
   editor?: typeof Vue;
+  metaErrorText?:string;
   attributeValueToJSONConvertible?:(t:OriginalConvertedType)=>JSONConvertibleType;
   jsonConvertibleToAttribute?:(t:JSONConvertibleType)=>OriginalConvertedType;
   readerModelFromConvertible?:(t:JSONConvertibleType)=>ReaderModel;

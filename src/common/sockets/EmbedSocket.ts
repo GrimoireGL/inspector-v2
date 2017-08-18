@@ -12,7 +12,6 @@ export default class EmbedSocket extends BasicSocket{
     window.postMessage(args,"*");
   }
 
-
   protected __receiveFilter(args:any):boolean{
     return args.$fromBackend !== false;
   }

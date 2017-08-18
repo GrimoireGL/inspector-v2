@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import ElementTreeStore from "../ElementTreeStore";
+import ElementTreeStore from "./ElementTreeStore";
 
 @Component({})
 export default class NodeSearchBox extends Vue{

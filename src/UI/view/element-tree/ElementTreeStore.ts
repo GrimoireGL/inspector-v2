@@ -1,6 +1,7 @@
 import { Store} from "vuex";
 import Vue from "vue";
 import Vuex from "vuex";
+import UIConnectorProvider from "../../controller/UIConnectorProvider";
 Vue.use(Vuex);
 const elementTreeStore = new Store({
   state:{
@@ -15,8 +16,9 @@ const elementTreeStore = new Store({
     changeQuery(state,query:string):void{
       state.query = query;
     },
-    selectNode(state,nodeId:string):void{
-      state.selectedNodeId = nodeId
+    selectNode(state,args:{structureId:string,nodeId:string}):void{
+      state.selectedNodeId = args.structureId
+      UIConnectorProvider.nodeObserver.setInspectionTarget(args.nodeId);
     },
     setQueryMode(state,queryMode:string):void{
       state.queryMode = queryMode;

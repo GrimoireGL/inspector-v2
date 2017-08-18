@@ -1,6 +1,6 @@
 <template>
   <div class="component-root-elements-tool">
-    <VerticalSeparator leftMinSize="300" rightMinSize="300">
+    <VerticalSeparator leftMinSize="300" rightMinSize="450">
       <ElementTree slot="left"/>
       <Inspector slot="right"/>
     </VerticalSeparator>
@@ -10,9 +10,9 @@
 <script>
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import VerticalSeparator from "../../../common/vertical-separator.vue";
-import ElementTree from "./components/element-tree/element-tree.vue";
-import Inspector from "./components/inspector/inspector.vue";
+import VerticalSeparator from "../common/vertical-separator.vue";
+import ElementTree from "../element-tree/element-tree.vue";
+import Inspector from "../inspector/inspector.vue";
 @Component({components:{VerticalSeparator,ElementTree,Inspector}})
 export default class ElementsToolBody extends Vue{
 }

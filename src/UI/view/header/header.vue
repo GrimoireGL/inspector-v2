@@ -1,7 +1,7 @@
 <template>
   <div class="component-root-header">
     <div class="root-selector">
-      <p><img src="res/resources/small-logo.png"/><p class="title">Grimoire.js</p></p>
+      <p><img src="../../../resources/small-logo.png"/><p class="title">Grimoire.js</p></p>
       <RootSelector/>
     </div>
     <div class="middle">

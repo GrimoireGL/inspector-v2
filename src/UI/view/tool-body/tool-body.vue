@@ -11,4 +11,5 @@
 <style lang="stylus">
 .component-root-tool-body
   flex 1
+  overflow-y scroll
 </style>

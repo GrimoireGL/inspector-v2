@@ -4,7 +4,7 @@ export default class ElementHighlighter {
     constructor() {
         this._higlightElement = document.createElement("div");
         this._higlightElement.style.opacity = "0.1";
-        this._higlightElement.style.backgroundColor = "red";
+        this._higlightElement.style.backgroundColor = "#5940AC";
         this._higlightElement.style.position = "absolute";
         this._higlightElement.style.left = "0px";
         this._higlightElement.style.right = "0px";

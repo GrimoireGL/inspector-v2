@@ -1,6 +1,6 @@
 <template>
   <span class="component-root-inspector-reader-string">
-    {{value.value}}
+    {{value}}
   </span>
 </template>
 
@@ -11,7 +11,7 @@ import {Prop} from "vue-property-decorator";
 @Component({})
 export default class StringReader extends Vue{
   @Prop()
-  public value:{value:string};
+  public value:string;
 }
 </script>
 

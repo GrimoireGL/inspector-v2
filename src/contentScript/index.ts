@@ -1,11 +1,11 @@
 import FrameObserver from "./FrameObserver";
 import ContentScriptSocket from "../common/sockets/ContentScriptSocket";
 import ScriptInjector from "./ScriptInjector";
-import GrimoireMessageEvent from "../common/messages/GrimoireMessageEvent";
+import FrameWindowMessageEvent from "../common/messages/FrameWindowMessageEvent";
 const css = new ContentScriptSocket(window.location.href);
 const fo = new FrameObserver(css);
 // Pass messages to background from embed script
-window.addEventListener("message", (e: GrimoireMessageEvent) => {
+window.addEventListener("message", (e: FrameWindowMessageEvent) => {
   if (e.data.$messageType === void 0 || e.data.$fromBackend) {
     return;
   }

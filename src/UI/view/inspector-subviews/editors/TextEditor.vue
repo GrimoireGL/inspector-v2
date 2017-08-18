@@ -1,7 +1,6 @@
 <template>
   <div class="component-root-text-editor">
-    <p><i class="fa fa-pencil fa-fw"/></p>
-    <input ref="input" type="text" :value="value.value" @input="input"/>
+    <input ref="input" type="text" :value="value" @input="input"/>
   </div>
 </template>
 
@@ -12,7 +11,7 @@ import {Prop} from 'vue-property-decorator';
 @Component({})
 export default class TextEditor extends Vue{
   @Prop()
-  public value:{value:string};
+  public value:string;
 
   public input():void{
     this.$emit("input",(this.$refs.input as HTMLInputElement).value);
@@ -24,7 +23,7 @@ export default class TextEditor extends Vue{
 @import "~gls/index.styl"
 .component-root-text-editor
   display flex
-  height 32px
+  height 24px
   p
     margin 0px 0px 0px 5px
   i

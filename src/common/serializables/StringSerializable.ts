@@ -2,13 +2,11 @@ import {Serializable,Serialize, SerializeProperty} from "ts-serializer";
 @Serialize({})
 export default class StringSerializable extends Serializable{
 
-  public constructor(v:string){
+  public constructor(v:string|null){
     super();
-    if(typeof v === "string"){
-      this.value = v;
-    }
+    this.value = v;
   }
 
   @SerializeProperty({})
-  public value:string;
+  public value:string|null;
 }

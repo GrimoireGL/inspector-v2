@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import TreeElement from "../TreeElement";
+import TreeElement from "./TreeElement";
 import {Prop} from "vue-property-decorator";
 @Component({})
 export default class ElementsTreeNode extends Vue{
@@ -67,6 +67,6 @@ export default class ElementsTreeNode extends Vue{
   }
 
   public selectNode():void{
-    this.$store.commit("selectNode",this.structureId);
+    this.$store.commit("selectNode",{structureId:this.structureId,nodeId:this.node.id});
   }
 }

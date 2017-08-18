@@ -1,8 +1,8 @@
 <template>
-  <div class="component-root-window-element" @mouseover="mouseover" @mouseout="mouseout">
-    <p class="window-title"><i class="fa fa-window-maximize fa-fw"></i>{{windowInfo.windowLocation}}</p>
+  <div class="component-root-window-element" @mouseover="mouseover" @mouseout="mouseout" @click="mouseout">
+    <p class="window-title"><i v-if="isSelected" class="fa fa-fw fa-check"/><i class="fa fa-window-maximize fa-fw"></i>{{windowInfo.windowLocation}}</p>
     <div v-for="(root,index) in windowInfo.roots" :key="index" class="root-selector-container">
-      <RootSelector :selectorInfo="root" @root-selector-mouseover="rootSelectorMouseover" @root-selector-mouseout="rootSelectorMouseout"/>
+      <RootSelector :selectorInfo="root" @root-selector-mouseover="rootSelectorMouseover" @root-selector-mouseout="rootSelectorMouseout" @root-selector-click="rootSelectorClick"/>
     </div>
   </div>
 </template>
@@ -18,6 +18,10 @@ export default class WindowElement extends Vue{
   @Prop()
   windowInfo:FrameWindowSchema
 
+  public get isSelected():boolean{
+    return this.$store.state.windowId === this.windowInfo.id;
+  }
+
   public mouseover():void{
     this.$emit("window-selector-hover",this.windowInfo.id);
   }
@@ -32,6 +36,10 @@ export default class WindowElement extends Vue{
 
   public rootSelectorMouseout(args:any):void{
     this.$emit("root-selector-mouseout",Object.assign(args,{windowId:this.windowInfo.id}));
+  }
+
+  public rootSelectorClick(args:any):void{
+    this.$emit("root-selector-click",Object.assign(args,{windowId:this.windowInfo.id}));
   }
 }
 </script>
