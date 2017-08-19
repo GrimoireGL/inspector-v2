@@ -1,5 +1,5 @@
-import ISocket from "./ISocket";
-export default class SingleNodeSocket implements ISocket{
+import ISocket from "../../common/socket/ISocket";
+export default class SingleNodeSocketAdapter implements ISocket{
     public frameId:string;
 
     public rootNodeId:string;

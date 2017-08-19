@@ -1,6 +1,6 @@
 import { EventEmitter } from "eventemitter3";
 import IDGenerator from "../common/IDGenerator";
-import ContentScriptSocket from "../common/sockets/ContentScriptSocket";
+import ContentScriptSocket from "./ContentScriptSocket";
 export default class FrameObserver extends EventEmitter {
 
   public windowId: string;

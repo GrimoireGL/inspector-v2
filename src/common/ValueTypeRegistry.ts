@@ -2,7 +2,6 @@ import ValueTypeHandler from "./ValueTypeHandler";
 import Vue from "vue";
 import StringReader from "../UI/view/inspector-subviews/readers/StringReader.vue";
 import UnsupportedEditor from "../UI/view/inspector-subviews/editors/UnsupportedEditor.vue";
-import StringSerializable from "./serializables/StringSerializable";
 export default class ValueTypeRegistry {
 
   private static _handlers: { [fqn: string]: ValueTypeHandler<any, any, any, any> } = {};

@@ -1,4 +1,4 @@
-import ISocket from "../../common/sockets/ISocket";
+import ISocket from "../../common/socket/ISocket";
 import TreeElement from "../view/element-tree/TreeElement";
 import InspectionData from "../view/inspector/InspectionData";
 export default class GomlNodeObserver {

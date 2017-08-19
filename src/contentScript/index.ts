@@ -1,5 +1,5 @@
 import FrameObserver from "./FrameObserver";
-import ContentScriptSocket from "../common/sockets/ContentScriptSocket";
+import ContentScriptSocket from "./ContentScriptSocket";
 import ScriptInjector from "./ScriptInjector";
 import FrameWindowMessageEvent from "../common/messages/FrameWindowMessageEvent";
 const css = new ContentScriptSocket(window.location.href);

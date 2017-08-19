@@ -1,26 +1,13 @@
-import ISocket from "../common/sockets/ISocket";
+import ISocket from "../../common/socket/ISocket";
 import GrimoireInterfaceImpl from "grimoirejs/ref/Interface/GrimoireInterfaceImpl";
-import ElementHighlighter from "./ElementHighlighter";
+import ElementHighlighter from "../ElementHighlighter";
 export default class GomlRootObserver {
     constructor(public socket: ISocket, public gr: GrimoireInterfaceImpl) {
         socket.on("fetch-root-node", (args: Object) => {
             this.notifyGomlNodes();
         });
-        const eh = new ElementHighlighter(0.7);
-        socket.on("highlight-canvas", (args: any) => {
-            const scriptTag = this._getScriptTagFromId(args.rootNodeId);
-            if(!scriptTag){
-                return;
-            }
-            const node = this.gr.getRootNode(scriptTag);
-            if (node) {
-                const container = node!.companion.get("canvasContainer") as HTMLDivElement;
-                eh.highlight(container); 
-            }
-        });
-        socket.on("remove-highlight-canvas", (args: any) => {
-            eh.disable();
-        });
+        this._registerCanvasHiglighter();
+        this._registerBodyHighlighter();
     }
 
     public notifyGomlNodes(): void {
@@ -39,6 +26,34 @@ export default class GomlRootObserver {
         }
         this.socket.send("notify-rootnodes", {
             nodes: rootNodes
+        });
+    }
+
+    private _registerCanvasHiglighter(): void {
+        const eh = new ElementHighlighter(0.7);
+        this.socket.on("highlight-canvas", (args: any) => {
+            const scriptTag = this._getScriptTagFromId(args.rootNodeId);
+            if (!scriptTag) {
+                return;
+            }
+            const node = this.gr.getRootNode(scriptTag);
+            if (node) {
+                const container = node!.companion.get("canvasContainer") as HTMLDivElement;
+                eh.highlight(container);
+            }
+        });
+        this.socket.on("remove-highlight-canvas", (args: any) => {
+            eh.disable();
+        });
+    }
+
+    private _registerBodyHighlighter(): void {
+        const eh = new ElementHighlighter(0.2);
+        this.socket.on("highlight-frame", () => {
+            eh.highlight("body");
+        });
+        this.socket.on("remove-highlight-frame", () => {
+            eh.disable();
         });
     }
 

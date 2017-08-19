@@ -1,8 +1,8 @@
 import FrameWindowSchema from "../view/root-selector/FrameWIndowSchema";
-import SingleNodeSocket from "../../common/sockets/SingleNodeSocket";
+import SingleNodeSocketAdapter from "./SingleNodeSocketAdapter";
 interface IWindowFrameObserver{
     getModel():FrameWindowSchema[];
-    getNodeSocket():SingleNodeSocket;
+    getNodeSocket():SingleNodeSocketAdapter;
     setTarget(windowId:string|null,rootId:string|null):void;
     getCurrentWindowId():string|null;
     getCurrentRootId():string|null;

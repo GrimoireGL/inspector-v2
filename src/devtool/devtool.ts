@@ -1,7 +1,7 @@
 ///<reference path="../../node_modules/@types/filewriter/index.d.ts"/>
 ///<reference path="../../node_modules/@types/filesystem/index.d.ts"/>
 ///<reference path="../../node_modules/@types/chrome/index.d.ts"/>
-import DevtoolSocket from "../common/sockets/DevtoolSocket";
+import DevtoolSocket from "../common/socket/DevtoolSocket";
 import DevtoolWindowFrameObserver from "./DevtoolWindowFrameObserver";
 import UIConnectorProvider from "../UI/controller/UIConnectorProvider";
 import DevtoolAll from "../UI/view/devtool-all";

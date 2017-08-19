@@ -1,5 +1,8 @@
 import ISocket from "./ISocket";
 
+/**
+ * Default Implementation for ISocket.
+ */
 export default abstract class BasicSocket implements ISocket{
   private messageHandlers:{[messageType:string]:((args:Object)=>void)} = {};
   public send(messageType:string,args:any):void{

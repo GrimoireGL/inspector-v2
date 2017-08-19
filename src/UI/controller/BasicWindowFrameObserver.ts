@@ -1,25 +1,25 @@
 import IWindowFrameObserver from "./IWindowFrameObserver";
-import ISocket from "../../common/sockets/ISocket";
+import ISocket from "../../common/socket/ISocket";
 import FrameWindowSchema from "../view/root-selector/FrameWindowSchema";
-import SingleNodeSocket from "../../common/sockets/SingleNodeSocket";
+import SingleNodeSocketAdapter from "./SingleNodeSocketAdapter";
 export default abstract class BasicWindowFrameObserver implements IWindowFrameObserver {
     protected readonly __windows: FrameWindowSchema[] = [];
 
-    private readonly _singleNodeSocket: SingleNodeSocket;
+    private readonly _singleNodeSocket: SingleNodeSocketAdapter;
 
     private _currentWindowId: string | null;
 
     private _currentRootId: string | null;
 
     constructor(public socket: ISocket) {
-        this._singleNodeSocket = new SingleNodeSocket(this.socket);
+        this._singleNodeSocket = new SingleNodeSocketAdapter(this.socket);
         socket.on("meta-tab-reload", this.__tabReload.bind(this));
         socket.on("notify-window", this.__onWindowLoad.bind(this));
         socket.on("window-unload", this.__onWindowUnload.bind(this));
         socket.on("notify-rootnodes", this.__onNotifyRootNodes.bind(this));
     }
 
-    public getNodeSocket(): SingleNodeSocket {
+    public getNodeSocket(): SingleNodeSocketAdapter {
         return this._singleNodeSocket;
     }
     public setTarget(windowId: string, rootId: string): void {

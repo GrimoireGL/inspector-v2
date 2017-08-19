@@ -1,4 +1,4 @@
-import ISocket from "../common/sockets/ISocket";
+import ISocket from "../common/socket/ISocket";
 import IWindowFrameObserver from "../UI/controller/IWindowFrameObserver";
 import FrameWindowSchema from "../UI/view/root-selector/FrameWindowSchema";
 import BasicWindowFrameObserver from "../UI/controller/BasicWindowFrameObserver";

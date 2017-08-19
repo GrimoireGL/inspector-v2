@@ -1,14 +1,14 @@
-import EmbedNodeSocket from "../common/sockets/EmbedSingleNodeSocket";
-import IGrimoireNodeMessage from "../common/messages/IGrimoireNodeMessage"
+import SingleNodeSocketFilter from "../socket/SingleNodeSocketFilter";
+import IGrimoireNodeMessage from "../../common/messages/IGrimoireNodeMessage"
 import GomlNode from "grimoirejs/ref/Node/GomlNode";
-import GrimoireToViewModelConverter from "../common/GrimoireToViewModelConverter";
+import GrimoireToViewModelConverter from "../../common/GrimoireToViewModelConverter";
 import Constants from "grimoirejs/ref/Base/Constants";
-export default class GOMLStructureObserver {
+export default class TreeStructureObserver {
     private _currentTargetRoot: GomlNode | null;
 
     private _mutationObserver: MutationObserver;
 
-    constructor(public socket: EmbedNodeSocket) {
+    constructor(public socket: SingleNodeSocketFilter) {
         socket.on("start-observe-node", this._onStartObserving.bind(this));
         socket.on("end-observe-node", this._onEndObserving.bind(this));
         this._mutationObserver = new MutationObserver(this._onMutation.bind(this));

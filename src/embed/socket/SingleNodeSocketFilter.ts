@@ -1,6 +1,6 @@
-import ISocket from "./ISocket";
+import ISocket from "../../common/socket/ISocket";
 import GrimoireInterfaceImpl from "grimoirejs/ref/Interface/GrimoireInterfaceImpl";
-export default class EmbedSingleNodeSocket implements ISocket{
+export default class SingleNodeSocketFilter implements ISocket{
 
     constructor(public socket:ISocket,public gr:GrimoireInterfaceImpl){
         
