@@ -21,7 +21,7 @@
     "all_frames": true
   }],
   "web_accessible_resources":[
-    "dist/embed.js"
+    "dist/embed.extension.js"
   ],
   "background":{
     "scripts":["./dist/background.js"]

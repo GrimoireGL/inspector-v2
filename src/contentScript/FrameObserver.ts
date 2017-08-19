@@ -12,7 +12,7 @@ export default class FrameObserver extends EventEmitter {
     } else {
       this.windowId = IDGenerator.generate();
     }
-    css.on("fetch-windows", (args) => {
+    css.on("cs-fetch-windows", (args) => {
       this._notifyWindowState();
     });
     css.frameId = this.windowId;
@@ -30,14 +30,14 @@ export default class FrameObserver extends EventEmitter {
   }
 
   private _notifyWindowState(): void {
-    this.css.send("notify-window", {
+    this.css.send("cs-notify-window", {
       windowId: this.windowId,
       windowLocation:window.location.href
     });
   }
 
   private _onunload() {
-    this.css.send("window-unload", {
+    this.css.send("cs-window-unload", {
       windowId: this.windowId
     });
   }

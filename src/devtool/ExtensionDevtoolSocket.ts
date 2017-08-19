@@ -1,4 +1,4 @@
-import BasicSocket from "./BasicSocket";
+import BasicSocket from "../common/socket/BasicSocket";
 
 export default class DevtoolSocket extends BasicSocket{
   private _bpc:chrome.runtime.Port;

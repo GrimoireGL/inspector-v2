@@ -4,6 +4,7 @@ import TreeElement from "./TreeElement";
 import {Prop} from "vue-property-decorator";
 @Component({})
 export default class ElementsTreeNode extends Vue{
+
   @Prop()
   public node:TreeElement;
 
@@ -14,6 +15,10 @@ export default class ElementsTreeNode extends Vue{
   public structureId:string;
 
   public openByCaret:boolean = false;
+
+  public mounted(){
+    this.openByCaret = this.indentLevel < 4;
+  }
 
   public get displayName():string{
     const names = this.node.nodeFQN.split(".");

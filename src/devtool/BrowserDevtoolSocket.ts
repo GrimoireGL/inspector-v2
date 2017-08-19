@@ -1,6 +1,6 @@
-import BasicSocket from "../../common/socket/BasicSocket";
+import BasicSocket from "../common/socket/BasicSocket";
 
-export default class EmbedSocket extends BasicSocket{
+export default class BrowserDevtoolSocket extends BasicSocket{
   constructor(scope?:string){
     super(scope);
     window.addEventListener("message",message=>{
@@ -13,12 +13,12 @@ export default class EmbedSocket extends BasicSocket{
   }
 
   protected __receiveFilter(args:any):boolean{
-    return args.$fromBackend !== false;
+    return args.$fromBackend !== true;
   }
 
   protected __sendTransform(args:Object):Object{
     return Object.assign({
-      $fromBackend:false
+      $fromBackend:true
     },args);
   }
 }

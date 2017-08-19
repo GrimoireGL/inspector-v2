@@ -15,7 +15,7 @@ window.addEventListener("message", (e: FrameWindowMessageEvent) => {
   } else if (e.data.$source === "grimoirejs") {
     // Message from library
     if (e.data.$messageType === "library-loading") {
-      ScriptInjector.injectScript("../../dist/embed.js"); // TODO
+      ScriptInjector.injectScript("../../dist/embed.extension.js"); // TODO
     }
   }
 });

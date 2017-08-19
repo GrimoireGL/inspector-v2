@@ -53,7 +53,7 @@ export default class DevtoolConnectionRegistry{
     if(this._establishedPorts[tabId] && changedInfo.status === "complete"){
       this._establishedPorts[tabId].postMessage({
         $source:"grimoirejs-inspector-v2",
-        $messageType:"meta-tab-reload"
+        $messageType:"bs-tab-reload"
       });
     }
   }

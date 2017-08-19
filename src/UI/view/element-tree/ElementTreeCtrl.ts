@@ -4,7 +4,7 @@ import Vue from "vue";
 import ElementsTreeNodeElement from "./elements-tree-node.vue";
 import SearchBox from "./search-box.vue";
 import ElementTreeStore from "./ElementTreeStore";
-import UIConnectorProvider from "../../controller/UIConnectorProvider";
+import UIConnectorProvider from "../../model/UIConnectorProvider";
 @Component({components:{ElementsTreeNodeElement,SearchBox},store:ElementTreeStore})
 export default class ElementTree extends Vue {
   public root: TreeElement = {attributes:[],nodeFQN:"empty",children:[],id:"(empyty)"};

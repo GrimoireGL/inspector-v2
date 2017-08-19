@@ -1,8 +1,8 @@
-import IWindowFrameObserver from "./IWindowFrameObserver";
+import IWindowModel from "./IWindowModel";
 import ISocket from "../../common/socket/ISocket";
 import FrameWindowSchema from "../view/root-selector/FrameWindowSchema";
 import SingleNodeSocketAdapter from "./SingleNodeSocketAdapter";
-export default abstract class BasicWindowFrameObserver implements IWindowFrameObserver {
+export default abstract class BasicWindowModel implements IWindowModel {
     protected readonly __windows: FrameWindowSchema[] = [];
 
     private readonly _singleNodeSocket: SingleNodeSocketAdapter;
@@ -13,9 +13,9 @@ export default abstract class BasicWindowFrameObserver implements IWindowFrameOb
 
     constructor(public socket: ISocket) {
         this._singleNodeSocket = new SingleNodeSocketAdapter(this.socket);
-        socket.on("meta-tab-reload", this.__tabReload.bind(this));
-        socket.on("notify-window", this.__onWindowLoad.bind(this));
-        socket.on("window-unload", this.__onWindowUnload.bind(this));
+        socket.on("bs-tab-reload", this.__tabReload.bind(this));
+        socket.on("cs-notify-window", this.__onWindowLoad.bind(this));
+        socket.on("cs-window-unload", this.__onWindowUnload.bind(this));
         socket.on("notify-rootnodes", this.__onNotifyRootNodes.bind(this));
     }
 

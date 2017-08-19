@@ -3,12 +3,18 @@ import ISocket from "./ISocket";
 /**
  * Default Implementation for ISocket.
  */
-export default abstract class BasicSocket implements ISocket{
+export default abstract class BasicSocket implements ISocket{  
   private messageHandlers:{[messageType:string]:((args:Object)=>void)} = {};
+
+  public constructor(public scope = "devtool-mode"){
+
+  }
+
   public send(messageType:string,args:any):void{
     const messageContent = Object.assign({
       $source:"grimoirejs-inspector-v2",
-      $messageType:messageType
+      $messageType:messageType,
+      $scope:this.scope
     },this.__sendTransform(args));
     this.__send(messageContent);
   }
@@ -26,8 +32,9 @@ export default abstract class BasicSocket implements ISocket{
     throw new Error(`Message handler for type '${(args as any).$messageType}' is not registered yet.`);
   }
 
-  protected __onReceive(args:Object):void{
+  protected __onReceive(args:any):void{
     if((args as any).$source !== "grimoirejs-inspector-v2")return;
+    if(this.scope !== args.$scope)return;
     if(!this.__receiveFilter(args))return;
     if(!(args as any).$messageType)return;
     const type = (args as any).$messageType;

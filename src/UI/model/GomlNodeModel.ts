@@ -1,7 +1,7 @@
 import ISocket from "../../common/socket/ISocket";
 import TreeElement from "../view/element-tree/TreeElement";
 import InspectionData from "../view/inspector/InspectionData";
-export default class GomlNodeObserver {
+export default class GomlNodeModel {
 
     public readonly rootElement: TreeElement = { nodeFQN: "empty", attributes: [], children: [], id: "(empty)" };
 
@@ -17,6 +17,7 @@ export default class GomlNodeObserver {
             this.rootElement.id = args.root.id;
             this._idCache = {};
             this._cacheRecursive(this.rootElement);
+            this.setInspectionTarget(this.rootElement.id);
         });
         socket.on("notify-node-added", (args: any) => {
             this._addNode(args.parentId, args.node);

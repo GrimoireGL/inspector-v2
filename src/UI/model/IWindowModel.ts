@@ -1,6 +1,6 @@
 import FrameWindowSchema from "../view/root-selector/FrameWIndowSchema";
 import SingleNodeSocketAdapter from "./SingleNodeSocketAdapter";
-interface IWindowFrameObserver{
+interface IWindowModel{
     getModel():FrameWindowSchema[];
     getNodeSocket():SingleNodeSocketAdapter;
     setTarget(windowId:string|null,rootId:string|null):void;
@@ -12,4 +12,4 @@ interface IWindowFrameObserver{
     offCanvasHighlight(windowId:string,rootId:string): void;
 }
 
-export default IWindowFrameObserver;
+export default IWindowModel;

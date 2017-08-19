@@ -4,7 +4,7 @@ import InspectorHeader from "./InspectorHeader.vue";
 import InspectorComponent from "./InspectorComponent.vue";
 import InspectionData from "./InspectionData";
 import InspectorStore from "./InspectorStore";
-import UIConnectorProvider from "../../controller/UIConnectorProvider";
+import UIConnectorProvider from "../../model/UIConnectorProvider";
 @Component({components:{InspectorHeader,InspectorComponent},store:InspectorStore})
 export default class Inspector extends Vue{
   public target:InspectionData = {nodeFQN:"empty",components:[]};

@@ -3,10 +3,10 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: {
-    main:'./src/main.ts',
-    devtool:'./src/devtool/devtool.ts',
-    devtoolInit:'./src/devtool/devtoolInit.ts',
-    embed:"./src/embed/index.ts",
+    "devtool.browser":'./src/devtool/devtool.browser.ts',
+    "devtool.extension":'./src/devtool/devtool.extension.ts',
+    extensionInit:'./src/devtool/ExtensionInit.ts',
+    "embed.extension":"./src/embed/embed.extension.ts",
     contentScript:'./src/contentScript/index.ts',
     background:'./src/background/index.ts'
   },

@@ -3,7 +3,7 @@ import Component from 'vue-class-component'
 import WindowElement from './window-element.vue';
 import FrameWindowSchema from "./FrameWindowSchema";
 import { WindowEvent } from "../../../common/WindowEvent";
-import UIConnectorProvider from "../../controller/UIConnectorProvider";
+import UIConnectorProvider from "../../model/UIConnectorProvider";
 import RootNodeSchema from "./RootNodeSchema";
 import ClassIdNotationConverter from "../../../common/ClassIdNotationConverter";
 import RootSelectorStore from "./RootSelectorStore";

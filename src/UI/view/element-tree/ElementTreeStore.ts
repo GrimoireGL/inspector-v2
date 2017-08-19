@@ -1,7 +1,7 @@
 import { Store} from "vuex";
 import Vue from "vue";
 import Vuex from "vuex";
-import UIConnectorProvider from "../../controller/UIConnectorProvider";
+import UIConnectorProvider from "../../model/UIConnectorProvider";
 Vue.use(Vuex);
 const elementTreeStore = new Store({
   state:{

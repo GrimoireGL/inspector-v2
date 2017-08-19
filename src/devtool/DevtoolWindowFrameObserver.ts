@@ -1,8 +1,8 @@
 import ISocket from "../common/socket/ISocket";
-import IWindowFrameObserver from "../UI/controller/IWindowFrameObserver";
+import IWindowModel from "../UI/model/IWindowModel";
 import FrameWindowSchema from "../UI/view/root-selector/FrameWindowSchema";
-import BasicWindowFrameObserver from "../UI/controller/BasicWindowFrameObserver";
-export default class DevtoolWindowFrameObserver extends BasicWindowFrameObserver {
+import BasicWindowModel from "../UI/model/BasicWindowModel";
+export default class DevtoolWindowFrameObserver extends BasicWindowModel {
 
     constructor(socket: ISocket) {
         super(socket);
@@ -34,7 +34,7 @@ export default class DevtoolWindowFrameObserver extends BasicWindowFrameObserver
 
     protected __tabReload(): void {
         this._removeAllWindow();
-        this.socket.send("fetch-windows", {});
+        this.socket.send("cs-fetch-windows", {});
     }
 
     private _getIndexById(id: string): number {
