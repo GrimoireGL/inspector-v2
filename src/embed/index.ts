@@ -7,7 +7,7 @@ import IGrimoireNodeMessage from "../common/messages/IGrimoireNodeMessage";
 import NodeObserver from "./NodeObserver";
 import GOMLStructureObserver from "./GOMLStructureObserver";
 const gr = (window as GrimoireWindow).GrimoireJS;
-const eh = new ElementHiglighter();
+const eh = new ElementHiglighter(0.2);
 const es = new EmbedSocket();
 const esns = new EmbedSingleNodeSocket(es,gr);
 const goml = new GOMLStructureObserver(esns);

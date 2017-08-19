@@ -5,7 +5,7 @@
       <div v-if="noError" class="attribute-value">
         <component :is="editorComponent" :value="editorModel"/>
       </div>
-      <p v-else class="error">{{target.errorText}}</p>
+      <p v-else class="error"><i class="fa fa-fw fa-exclamation"></i>{{target.errorText}}</p>
     </div>
     <div class="popup-root" v-if="popupOpen">
       <div class="description-tooltip">
@@ -31,6 +31,9 @@
   .attribute-container
     display flex
     margin 2px 0px
+    >.error
+      color red
+      font-size font-size-smaller
     .attribute-name
       margin 0px 10px
       color $col("primary")

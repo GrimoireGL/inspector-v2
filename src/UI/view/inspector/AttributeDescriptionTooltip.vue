@@ -14,6 +14,8 @@
 .attribute-description-tooltip-root
     background-color $col("default")
     border 1px solid $col("primary")
+    >p
+      margin 2px
     .label
       color $col("primary")
       display inline-block

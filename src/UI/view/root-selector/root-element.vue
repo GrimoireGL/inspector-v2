@@ -1,6 +1,6 @@
 <template>
   <div class="component-root-element" @mouseover="mouseover" @mouseout="mouseout" @click="click">
-    <p><i v-if="isSelected" class="fa fa-fw fa-check"/><span>{displayName}}</span></p>
+    <p><i v-if="isSelected" class="fa fa-fw fa-check"/><span>{{displayName}}</span></p>
     <p class="glayout"><i class="fa fa-file-code-o fa-fw"></i>{{selectorInfo.src}}</p>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default class RootSelectorElement extends Vue{
   }
 
   public get displayName():string{
-    return ClassIdNotationConverter.convert(this.selectorInfo.id,this.selectorInfo.class);
+    return ClassIdNotationConverter.convert(this.selectorInfo.tagId,this.selectorInfo.class);
   }
 
   public mouseover():void{

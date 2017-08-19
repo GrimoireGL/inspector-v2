@@ -6,7 +6,7 @@ export default class GomlRootObserver {
         socket.on("fetch-root-node", (args: Object) => {
             this.notifyGomlNodes();
         });
-        const eh = new ElementHighlighter();
+        const eh = new ElementHighlighter(0.7);
         socket.on("highlight-canvas", (args: any) => {
             const scriptTag = this._getScriptTagFromId(args.rootNodeId);
             if(!scriptTag){

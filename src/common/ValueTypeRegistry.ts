@@ -48,6 +48,9 @@ export default class ValueTypeRegistry {
         if(Promise.resolve(v) === v){
           throw new Error(`"${type}" : Promise can not be converted to JSON`);
         }
+        if(typeof v === "object" && v !== null && typeof v.toString === "function"){
+          return v.toString();
+        }
         return v as any as U;
       };
     }
