@@ -1,9 +1,9 @@
 export default class ElementHighlighter {
     private _higlightElement: HTMLDivElement;
 
-    constructor(opacity:number) {
+    constructor(opacity: number) {
         this._higlightElement = document.createElement("div");
-        this._higlightElement.style.opacity = opacity+"";
+        this._higlightElement.style.opacity = opacity + "";
         this._higlightElement.style.backgroundColor = "#5940AC";
         this._higlightElement.style.position = "absolute";
         this._higlightElement.style.left = "0px";
@@ -11,6 +11,7 @@ export default class ElementHighlighter {
         this._higlightElement.style.top = "0px";
         this._higlightElement.style.bottom = "0px";
         this._higlightElement.style.zIndex = "1000000000";
+        this._higlightElement.style.pointerEvents = "none";
     }
 
     public highlight(query: string | HTMLElement): void {
@@ -19,7 +20,7 @@ export default class ElementHighlighter {
             if (queried.length > 0) {
                 queried.item(0).appendChild(this._higlightElement);
             }
-        }else{
+        } else {
             query.appendChild(this._higlightElement);
         }
     }

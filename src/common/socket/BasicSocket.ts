@@ -34,7 +34,9 @@ export default abstract class BasicSocket implements ISocket{
 
   protected __onReceive(args:any):void{
     if((args as any).$source !== "grimoirejs-inspector-v2")return;
-    if(this.scope !== args.$scope)return;
+    if(this.scope !== args.$scope){
+      return;
+    }
     if(!this.__receiveFilter(args))return;
     if(!(args as any).$messageType)return;
     const type = (args as any).$messageType;
