@@ -1,6 +1,8 @@
 import ISocket from "../../common/socket/ISocket";
 import TreeElement from "../view/element-tree/TreeElement";
 import InspectionData from "../view/inspector/InspectionData";
+import InspectionAttributeData from "../view/inspector/InspectionAttributeData";
+import IAttributeNotifyMessage from "../../common/messages/IAttributeNotifyMessage";
 export default class GomlNodeModel {
 
     public readonly rootElement: TreeElement = { nodeFQN: "empty", attributes: [], children: [], id: "(empty)" };
@@ -8,6 +10,8 @@ export default class GomlNodeModel {
     public readonly currentNode: InspectionData = { nodeFQN: "empty", components: [] };
 
     private _idCache: { [id: string]: TreeElement } = {};
+
+    private _attributeCache: {[key:string]:InspectionAttributeData} = {};
 
     constructor(public socket: ISocket) {
         socket.on("notify-node-structure", (args: any) => {
@@ -25,10 +29,19 @@ export default class GomlNodeModel {
         socket.on("notify-node-removed", (args: any) => {
             this._removeNode(args.parentId, args.nodeId);
         });
-        socket.on("notify-inspect-node",(args:any)=>{
+        socket.on("notify-inspect-node", (args: any) => {
             const inspectionData = args.nodeInfo as InspectionData;
             this.currentNode.nodeFQN = inspectionData.nodeFQN;
             this.currentNode.components = inspectionData.components;
+            this._attributeCache = {};
+            this._cacheAttributeIds();
+        });
+        socket.on("notify-attribute-changed", (args: IAttributeNotifyMessage) => {
+            args.mutations.forEach(m=>{
+                const target = this._attributeCache[m.componentId + "\\" + m.attributeFQN];
+                target.obtainedAttributeValue = m.attributeData.obtainedAttributeValue;
+                target.errorText = m.attributeData.errorText;
+            });
         });
     }
 
@@ -51,6 +64,14 @@ export default class GomlNodeModel {
         delete this._idCache[element.id];
         for (let i = 0; i < element.children.length; i++) {
             this._removeRecursive(element.children[i]);
+        }
+    }
+
+    private _cacheAttributeIds():void{
+        for(let component of this.currentNode.components){
+            for(let attribute of component.attributes){
+                this._attributeCache[component.id +"\\" + attribute.attributeFQN] = attribute;
+            }
         }
     }
 

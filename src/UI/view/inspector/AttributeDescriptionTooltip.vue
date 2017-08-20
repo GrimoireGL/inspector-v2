@@ -1,7 +1,7 @@
 <template>
   <div class="attribute-description-tooltip-root">
       <p><span class="label">Converter</span><span class="converter-name">{{target.converterType}}</span></p>
-      <p><span class="label">Default</span><span></span></p>
+      <p><span class="label">Default</span><span><component :is="reader" v-model="readerModel"/></span></p>
   </div>
 </template>
 

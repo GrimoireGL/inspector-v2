@@ -1,6 +1,6 @@
 <template>
   <div class="component-root-boolean-editor">
-    <p><i class="fa fa-check-square-o fa-fw" v-if="value"/><i class="fa fa-square-o fa-fw" v-else/></p>
+    <p><span><i class="fa fa-check-square-o fa-fw" v-if="value"/><i class="fa fa-square-o fa-fw" v-else/></span></p>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default class BooleanEditor extends Vue{
   color $col("primary")
   p
     margin 0px
-  p:hover
+  span:hover
     background-color $col("primary")
     color $col("primary","color")
     cursor pointer

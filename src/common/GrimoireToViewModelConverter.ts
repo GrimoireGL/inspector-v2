@@ -33,20 +33,21 @@ export default class GrimoireToViewModelConverter{
 
     private static convertInspectionComponentData(component:Component):InspectionComponentData{
         return {
+            id:component.id,
             componentFQN:component.name.fqn,
             attributes:component.attributes.toArray().map(a=>GrimoireToViewModelConverter.convertInspectionAttributeData(a))
         };
     }
 
-    private static convertInspectionAttributeData(attribute:Attribute):InspectionAttributeData{
+    public static convertInspectionAttributeData(attribute:Attribute):InspectionAttributeData{
         const converterName = Ensure.tobeFQN(attribute.converter.name)!;
         const converterType = ValueTypeRegistry.get(converterName);
         let defaultAttr = null;
         let attributeAttr = null;
         let errorText = undefined;
         try{
-            defaultAttr = converterType.attributeValueToJSONConvertible!(attribute.Value);
-            attributeAttr = converterType.attributeValueToJSONConvertible!(attribute.declaration.default);
+            defaultAttr = converterType.attributeValueToJSONConvertible!(attribute.converter.convert(attribute.declaration.default,attribute));
+            attributeAttr = converterType.attributeValueToJSONConvertible!(attribute.Value);
         }catch(e){
             errorText = (e as Error).message;
         }
