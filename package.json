@@ -34,9 +34,11 @@
     "babel-preset-env": "^1.5.1",
     "babel-preset-stage-2": "^6.24.1",
     "chrome-webstore-upload-cli": "^1.1.1",
+    "condition-circle": "^1.5.0",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
+    "semantic-release": "^7.0.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "ts-loader": "^2.2.2",
@@ -45,11 +47,13 @@
     "vue-template-compiler": "^2.3.3",
     "vue-ts-loader": "^0.0.3",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5",
-    "semantic-release": "^7.0.2"
+    "webpack-dev-server": "^2.4.5"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/GrimoireGL/inspector-v2.git"
+  },
+  "release": {
+    "verifyConditions": "condition-circle"
   }
 }
