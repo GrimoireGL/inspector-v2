@@ -1,9 +1,8 @@
 {
-  "name": "inspector-v2",
+  "name": "grimoirejs-inspector",
   "description": "An awesome devtool for Grimoire.js",
   "version": "0.0.0-development",
   "author": "kyasbal",
-  "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --progress",
     "dev-build": "NODE_ENV=development webpack --progress",
