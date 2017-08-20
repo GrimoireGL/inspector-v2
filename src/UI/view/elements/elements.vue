@@ -12,7 +12,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import VerticalSeparator from "../common/vertical-separator.vue";
 import ElementTree from "../element-tree/element-tree.vue";
-import Inspector from "../inspector/inspector.vue";
+import Inspector from "../inspector/Inspector.vue";
 @Component({components:{VerticalSeparator,ElementTree,Inspector}})
 export default class ElementsToolBody extends Vue{
 }
