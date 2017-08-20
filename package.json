@@ -10,7 +10,7 @@
     "test":"npm run build",
     "rewrite-manifest-version": "node ./copy-version.js",
     "publish-chrome-webstore": "npm run rewrite-manifest-version && sh ./make-zip.sh && webstore upload --file publish.zip --auto-publish",
-    "semantic-release": "semantic-release pre && npm publish && find ./node_modules -name '*.pem' -exec 'rm {};' && npm run publish-chrome-webstore && semantic-release post"
+    "semantic-release": "semantic-release pre && npm publish && find ./node_modules -name '*.pem' -exec 'rm {} ;' && npm run publish-chrome-webstore && semantic-release post"
   },
   "dependencies": {
     "@types/chrome": "^0.0.48",
