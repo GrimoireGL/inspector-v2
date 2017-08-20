@@ -1,6 +1,6 @@
 {
   "name": "Grimoire.js Devtool 2.0",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "manifest_version": 2,
   "description": "The inspector of Grimoire.js help us to develop WebGL stuff.",
   "devtools_page": "src/devtool/init.html",
@@ -10,20 +10,26 @@
     "http://*/*",
     "https://*/*"
   ],
-  "content_scripts":[{
-    "matches":[
-      "file://*/*",
-      "http://*/*",
-      "https://*/*"
-    ],
-    "run_at" :"document_start",
-    "js":["dist/contentScript.js"],
-    "all_frames": true
-  }],
-  "web_accessible_resources":[
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "dist/contentScript.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
     "dist/embed.extension.js"
   ],
-  "background":{
-    "scripts":["./dist/background.js"]
+  "background": {
+    "scripts": [
+      "./dist/background.js"
+    ]
   }
 }

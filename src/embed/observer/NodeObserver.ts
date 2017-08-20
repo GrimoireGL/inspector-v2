@@ -23,9 +23,9 @@ export default class NodeObserver {
                 nodeInfo: GrimoireToViewModelConverter.convertInspectionData(node)
             });
         });
-        socket.on("modify-attribute",(args:any)=>{
+        socket.on("modify-attribute", (args: any) => {
             const component = this.gr.componentDictionary[args.componentId] as Component;
-            component.setAttribute(args.attributeFQN,args.data);
+            component.setAttribute(args.attributeFQN, args.data);
         });
         setInterval(this._update.bind(this), 200);
     }
@@ -63,7 +63,7 @@ export default class NodeObserver {
         const components = this._currentNode.getComponents(Component);
         for (let c of components) {
             c.attributes.forEach((attribute) => {
-                attribute.watch(this._onAttributeChange);
+                attribute.watch(this._onAttributeChange,false,true);
                 this._watchingAttributes!.push(attribute);
             });
         }

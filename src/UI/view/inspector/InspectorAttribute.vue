@@ -2,6 +2,7 @@
   <div class="component-root-inspector-attribute">
     <div v-if="visibleByFilter" class="attribute-container">
       <p class="attribute-name" @mouseover="openPopup" @mouseout="closePopup">{{attributeName}}</p>
+      <p class="editorErrorIcon"><i :class="['fa fa-fw fa-exclamation',{hasErrorOnMutation:hasErrorOnMutation}]"/></p>
       <div v-if="noError" class="attribute-value">
         <component :is="editorComponent" :value="editorModel" @input="onEditorInput"/>
       </div>
@@ -31,6 +32,13 @@
   .attribute-container
     display flex
     margin 2px 0px
+    >.editorErrorIcon
+      margin 0px
+      color $col("error","color")
+      i
+        visibility hidden
+        &.hasErrorOnMutation
+          visibility visible
     >.error
       color red
       font-size font-size-smaller

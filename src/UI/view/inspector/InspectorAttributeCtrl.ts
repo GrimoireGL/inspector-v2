@@ -18,6 +18,8 @@ export default class InspectorAttribute extends Vue{
 
   public popupOpen:boolean = false;
 
+  public hasErrorOnMutation:boolean = false;
+
   public get noError():boolean{
     return this.target.errorText === void 0;
   }
@@ -57,6 +59,9 @@ export default class InspectorAttribute extends Vue{
     if(this.handler.isValidInputOnEditor!(input)){
       const convertible = this.handler.editorModelTOJSONConvertible!(input,this.editorModel);
       UIConnectorProvider.nodeObserver.sendAttributeModification(this.componentId,this.target.attributeFQN,convertible);
+      this.hasErrorOnMutation = false;
+    }else{
+      this.hasErrorOnMutation = true;
     }
   }
 }

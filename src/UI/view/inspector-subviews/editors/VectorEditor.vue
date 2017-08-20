@@ -2,7 +2,7 @@
   <div class="component-root-vector-editor">
       <div class="single-dimention" v-for="(v,index) of value" :key="index">
           <p>{{labels[index]}}</p>
-          <input type="text" :value="v"/>
+          <input type="text" :ref="labels[index]" :value="v" @input="onInput(labels[index],$event)"/>
       </div>
   </div>
 </template>
@@ -18,6 +18,14 @@ export default class VectorEditor extends Vue{
 
   public get labels():string[]{
       return ["X","Y","Z","W"];
+  }
+
+  public onInput(label:string,event:HTMLInputElement):void{
+    let result = [];
+    for(let i = 0; i < this.value.length; i++){
+        result.push((this.$refs[this.labels[i]] as HTMLInputElement[])[0].value);
+    }
+    this.$emit("input",result);
   }
 }
 </script>

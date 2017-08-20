@@ -1,6 +1,6 @@
 <template>
   <div class="component-root-boolean-editor">
-    <p><span><i class="fa fa-check-square-o fa-fw" v-if="value"/><i class="fa fa-square-o fa-fw" v-else/></span></p>
+    <p><span @click="onClick"><i class="fa fa-check-square-o fa-fw" v-if="value"/><i class="fa fa-square-o fa-fw" v-else/></span></p>
   </div>
 </template>
 
@@ -12,6 +12,10 @@ import {Prop} from 'vue-property-decorator';
 export default class BooleanEditor extends Vue{
   @Prop()
   public value:boolean;
+
+  public onClick():void{
+    this.$emit("input",!this.value);
+  }
 }
 </script>
 

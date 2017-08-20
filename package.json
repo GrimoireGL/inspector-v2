@@ -1,24 +1,30 @@
 {
   "name": "inspector-v2",
   "description": "An awesome devtool for Grimoire.js",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "author": "kyasbal",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --progress",
     "dev-build": "NODE_ENV=development webpack --progress",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
+    "prepare": "npm run build",
+    "rewrite-manifest-version": "node ./copy-version.js",
+    "publish-chrome-webstore": "npm run rewrite-manifest-version && sh ./make-zip.sh && webstore upload --file publish.zip --auto-publish",
+    "semantic-release": "semantic-release pre && npm publish && npm run publish-chrome-webstore && semantic-release post"
   },
   "dependencies": {
     "@types/chrome": "^0.0.48",
     "@types/lodash": "^4.14.69",
     "@types/validator": "^6.2.2",
+    "color-convert": "^1.9.0",
     "eventemitter3": "^2.0.3",
     "lodash": "^4.17.4",
     "ts-serializer": "^1.0.1",
     "validator": "^8.0.0",
     "vue": "^2.3.3",
     "vue-class-component": "^5.0.2",
+    "vue-color": "^2.3.2",
     "vue-property-decorator": "^5.1.1",
     "vuex": "^2.3.1"
   },
@@ -27,6 +33,7 @@
     "babel-loader": "^6.0.0",
     "babel-preset-env": "^1.5.1",
     "babel-preset-stage-2": "^6.24.1",
+    "chrome-webstore-upload-cli": "^1.1.1",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "file-loader": "^0.9.0",
@@ -38,6 +45,11 @@
     "vue-template-compiler": "^2.3.3",
     "vue-ts-loader": "^0.0.3",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5"
+    "webpack-dev-server": "^2.4.5",
+    "semantic-release": "^7.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GrimoireGL/inspector-v2.git"
   }
 }
