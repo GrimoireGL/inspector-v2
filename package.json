@@ -18,6 +18,7 @@
     "@types/validator": "^6.2.2",
     "color-convert": "^1.9.0",
     "eventemitter3": "^2.0.3",
+    "grimoirejs": "^0.19.5",
     "lodash": "^4.17.4",
     "ts-serializer": "^1.0.1",
     "validator": "^8.0.0",

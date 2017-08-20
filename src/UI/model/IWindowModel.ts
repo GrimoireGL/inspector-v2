@@ -1,4 +1,4 @@
-import FrameWindowSchema from "../view/root-selector/FrameWIndowSchema";
+import FrameWindowSchema from "../view/root-selector/FrameWindowSchema";
 import SingleNodeSocketAdapter from "./SingleNodeSocketAdapter";
 import IPluginContentData from "../view/declarations/IPluginContentData";
 interface IWindowModel{

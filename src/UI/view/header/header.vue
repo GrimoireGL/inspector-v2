@@ -17,7 +17,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import RootSelector from "../root-selector/root-selector.vue";
 import HeaderTabs from "../header-tabs/header-tabs.vue";
-import HeaderStore from "./headerStore";
+import HeaderStore from "./HeaderStore";
 @Component({components:{RootSelector,HeaderTabs},store:HeaderStore})
 export default class HeaderBelt extends Vue{
   public mounted(){
