@@ -1,1 +1,1 @@
-zip publish.zip ./manifest.json ./index.css ./dist ./src ./resources ./lib -r
+zip publish.zip ./manifest.json ./index.css ./dist ./src ./resources  -r

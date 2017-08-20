@@ -1,6 +1,6 @@
 {
   "name": "Grimoire.js Devtool 2.0",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "manifest_version": 2,
   "description": "The inspector of Grimoire.js help us to develop WebGL stuff.",
   "devtools_page": "src/devtool/init.html",
