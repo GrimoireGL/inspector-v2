@@ -4,10 +4,15 @@ import {Prop} from "vue-property-decorator";
 import InspectionAttributeData from "./InspectionAttributeData";
 import AttributeDescriptionTooltip from "./AttributeDescriptionTooltip.vue";
 import ValueTypeRegistry from "../../../common/ValueTypeRegistry";
+import ValueTypeHandler from "../../../common/ValueTypeHandler";
+import UIConnectorProvider from "../../model/UIConnectorProvider";
 @Component({components:{AttributeDescriptionTooltip}})
 export default class InspectorAttribute extends Vue{
   @Prop()
   public target:InspectionAttributeData;
+
+  @Prop()
+  public componentId:string;
 
   public open:boolean = false;
 
@@ -22,12 +27,16 @@ export default class InspectorAttribute extends Vue{
     return names[names.length - 1];
   }
 
+  public get handler():ValueTypeHandler<any,any,any,any,any>{
+    return ValueTypeRegistry.get(this.target.converterType);
+  }
+
   public get editorComponent():typeof Vue{
-    return ValueTypeRegistry.get(this.target.converterType).editor!;
+    return this.handler.editor!;
   }
 
   public get editorModel():any{
-    return ValueTypeRegistry.get(this.target.converterType).editorModelFromConvertible!(this.target.obtainedAttributeValue);
+    return this.handler.editorModelFromConvertible!(this.target.obtainedAttributeValue);
   }
 
   public get visibleByFilter():boolean{
@@ -42,5 +51,12 @@ export default class InspectorAttribute extends Vue{
 
   public closePopup():void{
     this.popupOpen = false;
+  }
+  
+  public onEditorInput(input:any):void{
+    if(this.handler.isValidInputOnEditor!(input)){
+      const convertible = this.handler.editorModelTOJSONConvertible!(input,this.editorModel);
+      UIConnectorProvider.nodeObserver.sendAttributeModification(this.componentId,this.target.attributeFQN,convertible);
+    }
   }
 }

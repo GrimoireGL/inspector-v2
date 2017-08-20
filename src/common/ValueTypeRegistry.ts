@@ -4,18 +4,23 @@ import StringReader from "../UI/view/inspector-subviews/readers/StringReader.vue
 import UnsupportedEditor from "../UI/view/inspector-subviews/editors/UnsupportedEditor.vue";
 export default class ValueTypeRegistry {
 
-  private static _handlers: { [fqn: string]: ValueTypeHandler<any, any, any, any> } = {};
+  private static _handlers: { [fqn: string]: ValueTypeHandler<any, any, any, any,any> } = {};
 
   public static defaultReader: typeof Vue = StringReader;
 
   public static defaultEditor: typeof Vue = UnsupportedEditor;
 
-  public static registerHandler<T, U , R, E>(converterFQN: string, handler: ValueTypeHandler<T, U, R, E>): void {
-    handler = ValueTypeRegistry._ensureTobeFilledValueTypeHandler(converterFQN,handler);
-    ValueTypeRegistry._handlers[converterFQN] = handler;
+  public static registerHandler<T, U, R, E,I>(converterFQN: string | string[], handler: ValueTypeHandler<T, U, R, E,I>): void {
+    if (typeof converterFQN === "string") {
+      converterFQN = [converterFQN];
+    }
+    for (let fqn of converterFQN) {
+      handler = ValueTypeRegistry._ensureTobeFilledValueTypeHandler(fqn, handler);
+      ValueTypeRegistry._handlers[fqn] = handler;
+    }
   }
 
-  public static override<T, U , R, E>(converterFQN: string, overrideFrom: string, handler: ValueTypeHandler<T, U, R, E>): void {
+  public static override<T, U, R, E,I>(converterFQN: string, overrideFrom: string, handler: ValueTypeHandler<T, U, R, E,I>): void {
     const base = ValueTypeRegistry._handlers[overrideFrom];
     if (base === void 0) {
       throw new Error(`${overrideFrom} is not registered yet.`);
@@ -23,16 +28,16 @@ export default class ValueTypeRegistry {
     ValueTypeRegistry._handlers[overrideFrom] = Object.assign(Object.assign({}, base), handler);
   }
 
-  public static get<T, U , R, E>(converterFQN: string): ValueTypeHandler<T, U, R, E> {
+  public static get<T, U, R, E,I>(converterFQN: string): ValueTypeHandler<T, U, R, E,I> {
     const fetched = ValueTypeRegistry._handlers[converterFQN];
-    if(fetched){
+    if (fetched) {
       return fetched;
-    }else{
-      return ValueTypeRegistry._ensureTobeFilledValueTypeHandler<T,U,R,E>(converterFQN,{});
+    } else {
+      return ValueTypeRegistry._ensureTobeFilledValueTypeHandler<T, U, R, E,I>(converterFQN, {});
     }
   }
 
-  private static _ensureTobeFilledValueTypeHandler<T, U, R, E>(type:string,handler: ValueTypeHandler<T, U, R, E>): ValueTypeHandler<T, U, R, E> {
+  private static _ensureTobeFilledValueTypeHandler<T, U, R, E,I>(type: string, handler: ValueTypeHandler<T, U, R, E,I>): ValueTypeHandler<T, U, R, E,I> {
     if (handler.reader === void 0) {
       handler.reader = ValueTypeRegistry.defaultReader;
     }
@@ -40,14 +45,14 @@ export default class ValueTypeRegistry {
       handler.editor = ValueTypeRegistry.defaultEditor;
     }
     if (handler.attributeValueToJSONConvertible === void 0) {
-      handler.attributeValueToJSONConvertible = (v:any) => {
-        if(typeof v === "function"){
+      handler.attributeValueToJSONConvertible = (v: any) => {
+        if (typeof v === "function") {
           throw new Error(`"${type}" : Function can not be converted to JSON`);
         }
-        if(Promise.resolve(v) === v){
+        if (Promise.resolve(v) === v) {
           throw new Error(`"${type}" : Promise can not be converted to JSON`);
         }
-        if(typeof v === "object" && v !== null && typeof v.toString === "function"){
+        if (typeof v === "object" && v !== null && typeof v.toString === "function") {
           return v.toString();
         }
         return v as any as U;
@@ -58,8 +63,8 @@ export default class ValueTypeRegistry {
         return v;
       }
     }
-    if (handler.getErrorFromEditor === void 0) {
-      handler.getErrorFromEditor = () => "";
+    if (handler.isValidInputOnEditor === void 0) {
+      handler.isValidInputOnEditor = () => true;
     }
     if (handler.readerModelFromConvertible === void 0) {
       handler.readerModelFromConvertible = (v) => v as any as R;

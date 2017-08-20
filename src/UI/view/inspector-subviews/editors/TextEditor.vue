@@ -1,6 +1,6 @@
 <template>
   <div class="component-root-text-editor">
-    <input ref="input" type="text" :value="value" @input="input"/>
+    <input ref="input" type="text" :value="displayValue" @input="input"/>
   </div>
 </template>
 
@@ -11,7 +11,15 @@ import {Prop} from 'vue-property-decorator';
 @Component({})
 export default class TextEditor extends Vue{
   @Prop()
-  public value:string;
+  public value:string|null;
+
+  public get displayValue():string{
+    if(this.value === null){
+      return "";
+    }else{
+      return this.value;
+    }
+  }
 
   public input():void{
     this.$emit("input",(this.$refs.input as HTMLInputElement).value);

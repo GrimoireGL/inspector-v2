@@ -1,7 +1,7 @@
 <template>
   <div class="component-root-inspector-component">
     <p class="component-title"><i :class="caretClass" @click="toggle"/><i class="fa fa-cube fa-fw"/>{{componentName}}</p>
-    <Attribute v-if="open" v-for="(attr,index) in target.attributes" :target="attr" :key="index"/>
+    <Attribute v-if="open" v-for="(attr,index) in target.attributes" :target="attr" :key="attr.attributeFQN" :componentId="target.id"/>
   </div>
 </template>
 

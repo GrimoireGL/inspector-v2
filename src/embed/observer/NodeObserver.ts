@@ -23,6 +23,10 @@ export default class NodeObserver {
                 nodeInfo: GrimoireToViewModelConverter.convertInspectionData(node)
             });
         });
+        socket.on("modify-attribute",(args:any)=>{
+            const component = this.gr.componentDictionary[args.componentId] as Component;
+            component.setAttribute(args.attributeFQN,args.data);
+        });
         setInterval(this._update.bind(this), 200);
     }
 

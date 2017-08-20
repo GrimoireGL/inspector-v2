@@ -12,9 +12,11 @@
   "dependencies": {
     "@types/chrome": "^0.0.48",
     "@types/lodash": "^4.14.69",
+    "@types/validator": "^6.2.2",
     "eventemitter3": "^2.0.3",
     "lodash": "^4.17.4",
     "ts-serializer": "^1.0.1",
+    "validator": "^8.0.0",
     "vue": "^2.3.3",
     "vue-class-component": "^5.0.2",
     "vue-property-decorator": "^5.1.1",

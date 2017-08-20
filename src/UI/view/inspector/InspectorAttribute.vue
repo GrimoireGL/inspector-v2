@@ -3,7 +3,7 @@
     <div v-if="visibleByFilter" class="attribute-container">
       <p class="attribute-name" @mouseover="openPopup" @mouseout="closePopup">{{attributeName}}</p>
       <div v-if="noError" class="attribute-value">
-        <component :is="editorComponent" :value="editorModel"/>
+        <component :is="editorComponent" :value="editorModel" @input="onEditorInput"/>
       </div>
       <p v-else class="error"><i class="fa fa-fw fa-exclamation"></i>{{target.errorText}}</p>
     </div>

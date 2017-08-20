@@ -53,6 +53,15 @@ export default class GomlNodeModel {
         this.socket.send("end-inspect-node", {});
     }
 
+    public sendAttributeModification(componentId:string,attributeFQN:string,data:any):void{
+        this.socket.send("modify-attribute",{
+            $rootNodeId:this.rootElement.id,
+            componentId:componentId,
+            attributeFQN:attributeFQN,
+            data:data
+        });
+    }
+
     private _cacheRecursive(element: TreeElement): void {
         this._idCache[element.id] = element;
         for (let i = 0; i < element.children.length; i++) {

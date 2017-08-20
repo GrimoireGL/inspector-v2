@@ -2,7 +2,7 @@
   <div class="component-root-inspector">
     <InspectorHeader :target="target"/>
     <div class="components">
-      <InspectorComponent v-for="(component,index) in target.components" :target="component" :key="index"/>
+      <InspectorComponent v-for="(component,index) in target.components" :target="component" :key="component.id"/>
     </div>
   </div>
 </template>
