@@ -1,21 +1,14 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
 import IPluginContentData from "./IPluginContentData";
+import UIConnectorProvider from "../../model/UIConnectorProvider";
 @Component({})
 export default class PluginContentList extends Vue {
-    public contents: IPluginContentData[] = [{
-        fqn: "fundamental.mesh",
-        type: "node"
-    },
-    {
-        fqn: "fundamental.Transform",
-        type: "component"
-    },
-    {
-        fqn: "fundamental.Position",
-        type: "converter"
-    },
-    ];
+    public contents: IPluginContentData[] = [];
+
+    public mounted():void{
+        this.contents = UIConnectorProvider.windowObserver.getDeclarationModel();
+    }
 
     public isVisible(content: IPluginContentData): boolean {
         if ((content.type === "node" && this.$store.state.showNode)

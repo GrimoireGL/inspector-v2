@@ -1,10 +1,14 @@
 import ISocket from "../../common/socket/ISocket";
 import GrimoireInterfaceImpl from "grimoirejs/ref/Interface/GrimoireInterfaceImpl";
 import ElementHighlighter from "../ElementHighlighter";
+import IPluginContentData from "../../UI/view/declarations/IPluginContentData";
 export default class GomlRootObserver {
     constructor(public socket: ISocket, public gr: GrimoireInterfaceImpl) {
         socket.on("fetch-root-node", (args: Object) => {
             this.notifyGomlNodes();
+        });
+        socket.on("fetch-declarations", (args: any) => {
+            this.notifyDeclarations();
         });
         this._registerCanvasHiglighter();
         this._registerBodyHighlighter();
@@ -27,6 +31,29 @@ export default class GomlRootObserver {
         this.socket.send("notify-rootnodes", {
             nodes: rootNodes
         });
+    }
+
+    public notifyDeclarations(): void {
+        const list = [] as IPluginContentData[];
+        this.gr.nodeDeclarations.forEach((node, fqn) => {
+            list.push({
+                fqn: fqn,
+                type: "node"
+            });
+        });
+        this.gr.componentDeclarations.forEach((node, fqn) => {
+            list.push({
+                fqn: fqn,
+                type: "component"
+            });
+        });
+        this.gr.converters.forEach((node, fqn) => {
+            list.push({
+                fqn: fqn,
+                type: "converter"
+            });
+        });
+        this.socket.send("notify-declarations",{declarations:list});
     }
 
     private _registerCanvasHiglighter(): void {

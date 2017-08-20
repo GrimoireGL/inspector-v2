@@ -2,6 +2,7 @@ import ISocket from "../common/socket/ISocket";
 import IWindowModel from "../UI/model/IWindowModel";
 import FrameWindowSchema from "../UI/view/root-selector/FrameWindowSchema";
 import BasicWindowModel from "../UI/model/BasicWindowModel";
+import IPluginContentData from "../UI/view/declarations/IPluginContentData";
 export default class DevtoolWindowFrameObserver extends BasicWindowModel {
 
     constructor(socket: ISocket) {
@@ -15,6 +16,12 @@ export default class DevtoolWindowFrameObserver extends BasicWindowModel {
         }
     }
 
+    protected __onNotifyDeclarations(args: any): void {
+        this.__declarationModel.splice(0,this.__declarationModel.length);
+        const list = args.declarations as IPluginContentData[];
+        list.forEach(v=>this.__declarationModel.push(v));
+    }
+
     protected __onWindowLoad(args: any): void {
         const windowId = args.windowId;
         this.__windows.push({
@@ -23,7 +30,7 @@ export default class DevtoolWindowFrameObserver extends BasicWindowModel {
             roots: []
         });
         this.socket.send("fetch-root-node", {
-            $frameId:windowId
+            $frameId: windowId
         });
     }
 

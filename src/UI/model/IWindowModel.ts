@@ -1,7 +1,9 @@
 import FrameWindowSchema from "../view/root-selector/FrameWIndowSchema";
 import SingleNodeSocketAdapter from "./SingleNodeSocketAdapter";
+import IPluginContentData from "../view/declarations/IPluginContentData";
 interface IWindowModel{
     getModel():FrameWindowSchema[];
+    getDeclarationModel():IPluginContentData[];
     getNodeSocket():SingleNodeSocketAdapter;
     setTarget(windowId:string|null,rootId:string|null):void;
     getCurrentWindowId():string|null;
