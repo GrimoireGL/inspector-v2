@@ -17,4 +17,6 @@
   flex-direction column
   font-size 16px
   font-family 'Open Sans', sans-serif;
+.fa-fw
+  vertical-align middle
 </style>

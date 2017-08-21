@@ -1,7 +1,7 @@
 <template>
   <div class="component-root-plugin-content-list">
       <div v-for="(content,index) in contents" v-if="isVisible(content)" :key="index" class="plugin-content-container">
-          <p><i :class="['fa fa-fw',getIcon(content.type)]"/></p><p class="name-label">{{getName(content.fqn)}}</p><p class="fqn-label">{{content.fqn}}</p>
+          <p><i :class="['fa fa-fw',getIcon(content.type)]"/></p><p class="name-label">{{getName(content)}}</p><p class="fqn-label">{{content.fqn}}</p>
       </div>
   </div>
 </template>
@@ -31,5 +31,5 @@
                 font-size font-size-smaller
                 display flex
                 align-items center
-                color $col("default","darker")
+                color $col("default","darkest")
 </style>

@@ -5,7 +5,7 @@ import InspectionAttributeData from "../view/inspector/InspectionAttributeData";
 import IAttributeNotifyMessage from "../../common/messages/IAttributeNotifyMessage";
 export default class GomlNodeModel {
 
-    public readonly rootElement: TreeElement = { nodeFQN: "empty", attributes: [], children: [], id: "(empty)" };
+    public readonly rootElement: TreeElement = { nodeFQN: "empty", attributes: [], children: [], id: "(empty)",componentFQNs:[] };
 
     public readonly currentNode: InspectionData = { nodeFQN: "empty", components: [] };
 

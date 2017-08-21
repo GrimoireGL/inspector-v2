@@ -35,6 +35,17 @@ export default class GomlRootObserver {
 
     public notifyDeclarations(): void {
         const list = [] as IPluginContentData[];
+        list.push({
+            fqn: `grimoirejs@${(this.gr as any)["__VERSION__"]}`,
+            type:"plugin"
+        });
+        for(let key in this.gr.lib){
+            const lib = this.gr.lib[key];
+            list.push({
+                fqn:`${lib.__NAME__}@${lib.__VERSION__}`,
+                type:"plugin"
+            });
+        }
         this.gr.nodeDeclarations.forEach((node, fqn) => {
             list.push({
                 fqn: fqn,

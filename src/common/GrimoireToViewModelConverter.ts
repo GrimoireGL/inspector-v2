@@ -18,7 +18,8 @@ export default class GrimoireToViewModelConverter{
             nodeFQN:node.name.fqn,
             attributes:[],
             children:children,
-            id:node.id
+            id:node.id,
+            componentFQNs:node.getComponents<Component>(Component).map(c=>c.name.fqn)
         };
     }
 

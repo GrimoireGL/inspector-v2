@@ -4,6 +4,7 @@
         <div class="declaration-body">
             <VerticalSeparator leftMinSize="200" rightMinSize="600">
                 <PluginContentList slot="left"/>
+                <DeclarationDescription slot="right"/>
             </VerticalSeparator>
         </div>
     </div>

@@ -8,7 +8,8 @@ const declarationStore = new Store({
         query: "",
         showNode: true,
         showComponent: true,
-        showConverter: true
+        showConverter: true,
+        showPlugin:true
     },
     getters: {
         hasQuery: state => !!state.query
@@ -25,6 +26,9 @@ const declarationStore = new Store({
         },
         toggleConverterVisibility(state): void {
             state.showConverter = !state.showConverter;
+        },
+        togglePluginVisibility(state):void{
+            state.showPlugin = !state.showPlugin;
         }
     }
 });

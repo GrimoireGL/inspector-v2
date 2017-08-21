@@ -7,7 +7,7 @@ import ElementTreeStore from "./ElementTreeStore";
 import UIConnectorProvider from "../../model/UIConnectorProvider";
 @Component({components:{ElementsTreeNodeElement,SearchBox},store:ElementTreeStore})
 export default class ElementTree extends Vue {
-  public root: TreeElement = {attributes:[],nodeFQN:"empty",children:[],id:"(empyty)"};
+  public root: TreeElement = {attributes:[],nodeFQN:"empty",children:[],id:"(empyty)",componentFQNs:[]};
 
   public mounted():void{
     this.root = UIConnectorProvider.nodeObserver.rootElement;

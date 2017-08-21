@@ -54,7 +54,15 @@ export default class ElementsTreeNode extends Vue{
   }
 
   public get shown():boolean{
-    return !this.$store.getters.hasQuery || this.node.nodeFQN.indexOf(this.$store.state.query) > -1
+    if(!this.$store.getters.hasQuery){
+      return true;
+    }else{
+      if(this.$store.state.queryMode === "nodename"){
+        return this.node.nodeFQN.indexOf(this.$store.state.query) > -1;
+      }else{
+        return this.node.componentFQNs.filter(fqn=>fqn.indexOf(this.$store.state.query) > -1).length > 0;
+      }
+    }
   }
 
   public get caretStyle():{[key:string]:any}{

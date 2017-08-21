@@ -13,7 +13,8 @@ export default class PluginContentList extends Vue {
     public isVisible(content: IPluginContentData): boolean {
         if ((content.type === "node" && this.$store.state.showNode)
             || (content.type === "component" && this.$store.state.showComponent)
-            || (content.type === "converter" && this.$store.state.showConverter)) {
+            || (content.type === "converter" && this.$store.state.showConverter)
+            || (content.type === "plugin" && this.$store.state.showPlugin)) {
             if (this.$store.getters.hasQuery) {
                 return content.fqn.toLowerCase().indexOf(this.$store.state.query.toLowerCase()) > -1;
             } else {
@@ -24,8 +25,11 @@ export default class PluginContentList extends Vue {
         }
     }
 
-    public getName(str: string): string {
-        const splitted = str.split(".");
+    public getName(data: IPluginContentData): string {
+        if(data.type === "plugin"){
+            return data.fqn.split("@")[0];
+        }
+        const splitted = data.fqn.split(".");
         return splitted[splitted.length - 1];
     }
 
@@ -37,6 +41,8 @@ export default class PluginContentList extends Vue {
                 return "fa-cube";
             case "converter":
                 return "fa-retweet";
+            case "plugin":
+                return "fa-archive";
             default:
                 return "";
         }

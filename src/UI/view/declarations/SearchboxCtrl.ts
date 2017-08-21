@@ -7,6 +7,11 @@ export default class Searchbox extends Vue {
     public get toggleSwitches(): { class: string[],selected:boolean,trigger:string }[] {
         return [
             {
+                class:["fa fa-fw fa-archive"],
+                selected:this.$store.state.showPlugin,
+                trigger:"togglePluginVisibility"
+            },
+            {
                 class: ["fa fa-fw fa-cubes"],
                 selected:this.$store.state.showNode,
                 trigger:"toggleNodeVisibility"
