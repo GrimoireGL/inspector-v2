@@ -5,7 +5,8 @@ import DeclarationDescriptionHeader from "./declaration-description-header.vue";
 import IPluginContent from "./IGrimoireSymbol";
 import DeclarationNode from "./declaration-node.vue"
 import DeclarationComponent from "./declaration-component.vue";
-@Component({components:{DeclarationDescriptionHeader}})
+import DeclarationPlugin from "./declaration-plugin.vue";
+@Component({ components: { DeclarationDescriptionHeader } })
 export default class DeclarationDescription extends Vue{
     public get contentSelected():boolean{
         return this.$store.getters.selected;
@@ -21,6 +22,8 @@ export default class DeclarationDescription extends Vue{
                 return DeclarationNode;
             case "component":
                 return DeclarationComponent;
+            case "plugin":
+                return DeclarationPlugin;
             default:
                 return null;
         }

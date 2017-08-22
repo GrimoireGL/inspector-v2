@@ -13,6 +13,7 @@
 @import "~gls/index.styl"
 .component-root-declaration-description-header
     display flex
+    flex-shrink 0
     flex-direction column
     height 60px
     border-bottom 1px solid $col("default","dark")

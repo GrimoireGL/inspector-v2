@@ -16,3 +16,7 @@ export interface IComponentDeclaration extends IGrimoireSymbol{
         fqn:string;
     }[];
 }
+
+export interface IPluginDeclaration extends IGrimoireSymbol{
+
+}
