@@ -1,16 +1,14 @@
 import Vue from 'vue'
 import Component from 'vue-class-component'
-import IPluginContentData from "./IPluginContentData";
+import IGrimoireSymbol from "./IGrimoireSymbol";
 import UIConnectorProvider from "../../model/UIConnectorProvider";
+import {Prop} from "vue-property-decorator";
 @Component({})
 export default class PluginContentList extends Vue {
-    public contents: IPluginContentData[] = [];
+    @Prop()
+    public symbols: IGrimoireSymbol[];
 
-    public mounted():void{
-        this.contents = UIConnectorProvider.windowObserver.getDeclarationModel();
-    }
-
-    public isVisible(content: IPluginContentData): boolean {
+    public isVisible(content: IGrimoireSymbol): boolean {
         if ((content.type === "node" && this.$store.state.showNode)
             || (content.type === "component" && this.$store.state.showComponent)
             || (content.type === "converter" && this.$store.state.showConverter)
@@ -25,7 +23,7 @@ export default class PluginContentList extends Vue {
         }
     }
 
-    public getName(data: IPluginContentData): string {
+    public getName(data: IGrimoireSymbol): string {
         if(data.type === "plugin"){
             return data.fqn.split("@")[0];
         }
@@ -46,5 +44,13 @@ export default class PluginContentList extends Vue {
             default:
                 return "";
         }
+    }
+
+    public isHighlighted(data: IGrimoireSymbol):boolean{
+        return this.$store.state.selectedItem === data;
+    }
+
+    public select(i:number):void{
+        this.$store.commit("select",this.symbols[i]);
     }
 }

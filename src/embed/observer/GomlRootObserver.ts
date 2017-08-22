@@ -1,7 +1,7 @@
 import ISocket from "../../common/socket/ISocket";
 import GrimoireInterfaceImpl from "grimoirejs/ref/Interface/GrimoireInterfaceImpl";
 import ElementHighlighter from "../ElementHighlighter";
-import IPluginContentData from "../../UI/view/declarations/IPluginContentData";
+import IGrimoireSymbol, { INodeDeclaration } from "../../UI/view/declarations/IGrimoireSymbol";
 export default class GomlRootObserver {
     constructor(public socket: ISocket, public gr: GrimoireInterfaceImpl) {
         socket.on("fetch-root-node", (args: Object) => {
@@ -34,7 +34,7 @@ export default class GomlRootObserver {
     }
 
     public notifyDeclarations(): void {
-        const list = [] as IPluginContentData[];
+        const list = [] as IGrimoireSymbol[];
         list.push({
             fqn: `grimoirejs@${(this.gr as any)["__VERSION__"]}`,
             type:"plugin"
@@ -47,10 +47,16 @@ export default class GomlRootObserver {
             });
         }
         this.gr.nodeDeclarations.forEach((node, fqn) => {
+            const superNode = node.superNode;
+            const superNodeName = node.superNode ? node.superNode.fqn : null;
+            const components = [] as string[];
+            node.defaultComponents.forEach(n=>components.push(n.fqn));
             list.push({
                 fqn: fqn,
-                type: "node"
-            });
+                type: "node",
+                defaultComponents:components,
+                extendsFrom:superNodeName
+            } as INodeDeclaration);
         });
         this.gr.componentDeclarations.forEach((node, fqn) => {
             list.push({

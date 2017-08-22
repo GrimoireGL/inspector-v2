@@ -1,6 +1,7 @@
 <template>
-    <div class="component-root-declaration-description">
-
+    <div class="component-root-declaration-description" v-if="contentSelected">
+        <DeclarationDescriptionHeader :target="currentContent"/>
+        <component :is="contentViewer" :target="currentContent"/>
     </div>
 </template>
 

@@ -21,7 +21,6 @@ export default class ColorEditor extends Vue {
         } else {
             colorScaled.push(1);
         }
-        console.log(this.value);
         return {
             hex: this._rgbToHex.apply(this, colorScaled),
             rgba: {
@@ -47,7 +46,6 @@ export default class ColorEditor extends Vue {
     public onInput(e: any): void {
         const rgba = e.rgba;
         const rgbaArray = [rgba.r, rgba.g, rgba.b, e.a];
-        console.log(rgbaArray);
         this.$emit("input", this._toColorString(rgbaArray, 1));
     }
 

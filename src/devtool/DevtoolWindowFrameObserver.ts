@@ -2,7 +2,7 @@ import ISocket from "../common/socket/ISocket";
 import IWindowModel from "../UI/model/IWindowModel";
 import FrameWindowSchema from "../UI/view/root-selector/FrameWindowSchema";
 import BasicWindowModel from "../UI/model/BasicWindowModel";
-import IPluginContentData from "../UI/view/declarations/IPluginContentData";
+import IGrimoireSymbol from "../UI/view/declarations/IGrimoireSymbol";
 export default class DevtoolWindowFrameObserver extends BasicWindowModel {
 
     constructor(socket: ISocket) {
@@ -18,7 +18,7 @@ export default class DevtoolWindowFrameObserver extends BasicWindowModel {
 
     protected __onNotifyDeclarations(args: any): void {
         this.__declarationModel.splice(0,this.__declarationModel.length);
-        const list = args.declarations as IPluginContentData[];
+        const list = args.declarations as IGrimoireSymbol[];
         list.forEach(v=>this.__declarationModel.push(v));
     }
 

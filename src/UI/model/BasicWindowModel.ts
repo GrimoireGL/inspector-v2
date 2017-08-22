@@ -2,11 +2,11 @@ import IWindowModel from "./IWindowModel";
 import ISocket from "../../common/socket/ISocket";
 import FrameWindowSchema from "../view/root-selector/FrameWindowSchema";
 import SingleNodeSocketAdapter from "./SingleNodeSocketAdapter";
-import IPluginContentData from "../view/declarations/IPluginContentData";
+import IGrimoireSymbol from "../view/declarations/IGrimoireSymbol";
 export default abstract class BasicWindowModel implements IWindowModel {
     protected readonly __windows: FrameWindowSchema[] = [];
 
-    protected readonly __declarationModel:IPluginContentData[] = [];
+    protected readonly __declarationModel:IGrimoireSymbol[] = [];
 
     private readonly _singleNodeSocket: SingleNodeSocketAdapter;
 
@@ -27,7 +27,7 @@ export default abstract class BasicWindowModel implements IWindowModel {
         return this._singleNodeSocket;
     }
 
-    public getDeclarationModel():IPluginContentData[]{
+    public getDeclarationModel():IGrimoireSymbol[]{
         return this.__declarationModel;
     }
     
