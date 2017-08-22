@@ -9,3 +9,10 @@ export interface INodeDeclaration extends IGrimoireSymbol{
     defaultComponents:string[];
     extendsFrom:string|null;
 }
+
+export interface IComponentDeclaration extends IGrimoireSymbol{
+    defaultAttributes:{
+        converter:string;
+        fqn:string;
+    }[];
+}

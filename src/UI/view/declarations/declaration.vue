@@ -1,6 +1,8 @@
 <template>
     <div class="component-root-declaration">
-        <DeclarationHeader/>
+        <div class="declaration-header">
+            <DeclarationHeader/>
+        </div>
         <div class="declaration-body">
             <VerticalSeparator leftMinSize="200" rightMinSize="600">
                 <PluginContentList slot="left" :symbols="symbols"/>
@@ -21,7 +23,10 @@
     flex-direction column
     height 100%
     background-color $col("default")
+    >.declaration-header
+        flex-shrink 0
     >.declaration-body
-        flex 1
-        height 100%
+        flex-grow 1
+        flex-shrink 1
+        height calc(100% - 40px)
 </style>

@@ -20,6 +20,10 @@ export default class DeclarationNode extends Vue {
         return this.target.extendsFrom !== null;
     }
 
+    public get packageFQN():string{
+        return this.$store.getters.currentItemPackage.fqn;
+    }
+
     public toShortName(fqn:string):string{
         const splitted = fqn.split(".");
         return splitted[splitted.length - 1];

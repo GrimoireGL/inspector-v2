@@ -4,6 +4,7 @@ import {Prop} from "vue-property-decorator";
 import DeclarationDescriptionHeader from "./declaration-description-header.vue";
 import IPluginContent from "./IGrimoireSymbol";
 import DeclarationNode from "./declaration-node.vue"
+import DeclarationComponent from "./declaration-component.vue";
 @Component({components:{DeclarationDescriptionHeader}})
 export default class DeclarationDescription extends Vue{
     public get contentSelected():boolean{
@@ -18,6 +19,8 @@ export default class DeclarationDescription extends Vue{
         switch(this.currentContent.type){
             case "node":
                 return DeclarationNode;
+            case "component":
+                return DeclarationComponent;
             default:
                 return null;
         }

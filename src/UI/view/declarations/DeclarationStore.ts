@@ -40,6 +40,20 @@ const declarationStore = new Store({
             }else{
                 return null;
             }
+        },
+        currentItemPackage:state=>{
+            if(state.selectedItem && state.selectedItem.type !== "plugin"){
+                const packageNamespace = state.selectedItem.fqn.split(".")[0];
+                const fqnBeginWith = packageNamespace === "grimoirejs" ? "grimoirejs" : `grimoirejs-${packageNamespace}`
+                for(let i = 0; i < state.symbols.length; i++){
+                    const symbol = state.symbols[i];
+                    if(symbol.fqn.startsWith(fqnBeginWith)){
+                        return symbol;
+                    }
+                }
+                return null;
+            }
+            return null;
         }
     },
     mutations: {

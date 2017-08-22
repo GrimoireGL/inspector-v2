@@ -1,7 +1,9 @@
 import ISocket from "../../common/socket/ISocket";
 import GrimoireInterfaceImpl from "grimoirejs/ref/Interface/GrimoireInterfaceImpl";
 import ElementHighlighter from "../ElementHighlighter";
-import IGrimoireSymbol, { INodeDeclaration } from "../../UI/view/declarations/IGrimoireSymbol";
+import IGrimoireSymbol, { INodeDeclaration,IComponentDeclaration } from "../../UI/view/declarations/IGrimoireSymbol";
+import Ensure from "grimoirejs/ref/Base/Ensure";
+import ValueTypeRegistry from "../../common/ValueTypeRegistry";
 export default class GomlRootObserver {
     constructor(public socket: ISocket, public gr: GrimoireInterfaceImpl) {
         socket.on("fetch-root-node", (args: Object) => {
@@ -58,11 +60,22 @@ export default class GomlRootObserver {
                 extendsFrom:superNodeName
             } as INodeDeclaration);
         });
-        this.gr.componentDeclarations.forEach((node, fqn) => {
+        this.gr.componentDeclarations.forEach((component, fqn) => {
+            const attributes = [];
+            for(let name in component.attributes){
+                const attribute = component.attributes[name];
+                const converterName = Ensure.tobeNSIdentity(attribute.converter)!.fqn;
+                const converterType = ValueTypeRegistry.get(converterName);
+                attributes.push({
+                    fqn:name,
+                    converter:converterName
+                });
+            }
             list.push({
                 fqn: fqn,
-                type: "component"
-            });
+                type: "component",
+                defaultAttributes:attributes
+            } as IComponentDeclaration);
         });
         this.gr.converters.forEach((node, fqn) => {
             list.push({
