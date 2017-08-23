@@ -6,7 +6,8 @@ import VerticalSeparator from "../common/vertical-separator.vue";
 import PluginContentList from "./plugin-content-list.vue";
 import DeclarationStore from "./DeclarationStore";
 import DeclarationDescription from "./declaration-description.vue";
-import { INodeDeclaration } from "./IGrimoireSymbol";
+import { INodeDeclaration, IComponentInheritence } from "./IGrimoireSymbol";
+import { DeclarationFilter } from "./DeclarationFilter";
 @Component({ components: {} })
 export default class DeclarationNode extends Vue {
     @Prop()
@@ -21,7 +22,8 @@ export default class DeclarationNode extends Vue {
     }
 
     public get packageFQN():string{
-        return this.$store.getters.currentItemPackage.fqn;
+        const plugin = (this.$store.getters.filter as DeclarationFilter).getPackageNameFromSymbol(this.target);
+        return (plugin ? plugin.fqn : "(Unknown)");
     }
 
     public toShortName(fqn:string):string{
@@ -35,8 +37,8 @@ export default class DeclarationNode extends Vue {
         }
     }
 
-    public get defaultComponentByInheritence():{fqn:string,by:string}[]{
-        return this.$store.getters.currentItemInheritence;
+    public get defaultComponentByInheritence():IComponentInheritence[]{
+        return (this.$store.getters.filter as DeclarationFilter).getComponentInheritenceByNode(this.target);
     }
 
     public openByFQN(fqn:string):void{

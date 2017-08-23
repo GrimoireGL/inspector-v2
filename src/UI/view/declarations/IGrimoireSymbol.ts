@@ -20,3 +20,11 @@ export interface IComponentDeclaration extends IGrimoireSymbol{
 export interface IPluginDeclaration extends IGrimoireSymbol{
 
 }
+
+/**
+ * Represents a component information that included in node by inheritence.
+ */
+export interface IComponentInheritence{
+    fqn:string;
+    by:string;
+}
