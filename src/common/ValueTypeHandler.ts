@@ -1,6 +1,7 @@
 import Vue from "vue";
 import {Serializable} from "ts-serializer";
 interface ValueTypeHandler<OriginalConvertedType,JSONConvertibleType,ReaderModel,EditorModel,EditorInput>{
+  usePreConvertValueInstead?:boolean;
   reader?: typeof Vue;
   editor?: typeof Vue;
   metaErrorText?:string;

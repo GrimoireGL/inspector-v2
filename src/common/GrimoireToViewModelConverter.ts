@@ -47,8 +47,13 @@ export default class GrimoireToViewModelConverter{
         let attributeAttr = null;
         let errorText = undefined;
         try{
-            defaultAttr = converterType.attributeValueToJSONConvertible!(attribute.converter.convert(attribute.declaration.default,attribute));
-            attributeAttr = converterType.attributeValueToJSONConvertible!(attribute.Value);
+            if(converterType.usePreConvertValueInstead){
+                defaultAttr = converterType.attributeValueToJSONConvertible!(attribute.declaration.default);
+                attributeAttr = converterType.attributeValueToJSONConvertible!((attribute as any)["_value"]);
+            }else{
+                defaultAttr = converterType.attributeValueToJSONConvertible!(attribute.converter.convert(attribute.declaration.default,attribute));
+                attributeAttr = converterType.attributeValueToJSONConvertible!(attribute.Value);    
+            }
         }catch(e){
             errorText = (e as Error).message;
         }

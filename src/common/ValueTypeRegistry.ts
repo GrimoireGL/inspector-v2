@@ -38,6 +38,9 @@ export default class ValueTypeRegistry {
   }
 
   private static _ensureTobeFilledValueTypeHandler<T, U, R, E,I>(type: string, handler: ValueTypeHandler<T, U, R, E,I>): ValueTypeHandler<T, U, R, E,I> {
+    if(handler.usePreConvertValueInstead === void 0){
+      handler.usePreConvertValueInstead = false;
+    }
     if (handler.reader === void 0) {
       handler.reader = ValueTypeRegistry.defaultReader;
     }

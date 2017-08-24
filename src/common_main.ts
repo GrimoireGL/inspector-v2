@@ -15,3 +15,6 @@ ValueTypeRegistry.registerHandler("grimoirejs.Boolean", { reader: BooleanReader,
 ValueTypeRegistry.registerHandler("math.Rotation3", { editor: VectorEditor, attributeValueToJSONConvertible: (v: any) => v.eularAngles.rawElements });
 ValueTypeRegistry.registerHandler(["math.Vector2","math.Vector3","math.Vector4"], { editor: VectorEditor, attributeValueToJSONConvertible: (v:any)=>v.rawElements,isValidInputOnEditor:(v:string[])=>v.filter((e:string)=>!isFloat(e)).length === 0 });
 ValueTypeRegistry.registerHandler(["math.Color3","math.Color4"], { editor: ColorEditor, reader: ColorReader, attributeValueToJSONConvertible: (v:any)=>v.rawElements });
+ValueTypeRegistry.registerHandler("fundamental.Texture", { editor: TextView, usePreConvertValueInstead:true});
+ValueTypeRegistry.registerHandler("fundamental.Geometry", { editor: TextView, usePreConvertValueInstead:true});
+ValueTypeRegistry.registerHandler("fundamental.Material", { editor: TextView, usePreConvertValueInstead:true});
