@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import {Prop} from "vue-property-decorator"
 import Elements from "../elements/elements.vue";
+import Animations from "../animations/animations.vue";
 import Declarations from "../declarations/declaration.vue";
 @Component({})
 export default class ToolBody extends Vue{
@@ -14,6 +15,8 @@ export default class ToolBody extends Vue{
         return Elements;
       case "declarations":
         return Declarations;
+      case "animations":
+        return Animations;
       default:
         return null;
     }

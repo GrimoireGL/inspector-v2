@@ -12,6 +12,14 @@ export default class GomlRootObserver {
         socket.on("fetch-declarations", (args: any) => {
             this.notifyDeclarations();
         });
+        socket.on("check-plugin-existence",(args:any)=>{
+            const plugin = this.gr.lib[args.pluginName];
+            if(plugin){
+                socket.send("notify-plugin-existence",{
+                    pluginName:args.pluginName
+                });
+            }
+        });
         this._registerCanvasHiglighter();
         this._registerBodyHighlighter();
     }
