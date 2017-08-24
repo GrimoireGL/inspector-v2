@@ -18,3 +18,4 @@ ValueTypeRegistry.registerHandler(["math.Color3","math.Color4"], { editor: Color
 ValueTypeRegistry.registerHandler("fundamental.Texture", { editor: TextView, usePreConvertValueInstead:true});
 ValueTypeRegistry.registerHandler("fundamental.Geometry", { editor: TextView, usePreConvertValueInstead:true});
 ValueTypeRegistry.registerHandler("fundamental.Material", { editor: TextView, usePreConvertValueInstead:true});
+ValueTypeRegistry.registerHandler("fundamental.CanvasSize", { editor: TextView, usePreConvertValueInstead:true});
