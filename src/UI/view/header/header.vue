@@ -5,6 +5,7 @@
       <RootSelector/>
     </div>
     <div class="middle">
+      <component :is="currentTopTool"/>
     </div>
     <div class="header-tabs">
       <HeaderTabs/>
@@ -18,12 +19,26 @@ import Component from 'vue-class-component'
 import RootSelector from "../root-selector/root-selector.vue";
 import HeaderTabs from "../header-tabs/header-tabs.vue";
 import HeaderStore from "./HeaderStore";
+import AnimationTopTool from "../animations/animation-top-tool.vue";
+import {Prop} from "vue-property-decorator";
 @Component({components:{RootSelector,HeaderTabs},store:HeaderStore})
 export default class HeaderBelt extends Vue{
+  @Prop({})
+  public currentTab:string;
+  
   public mounted(){
     this.$store.watch((state)=>state.currentTab,(tab)=>{
       this.$emit("selectedTabChanged",tab);
     });
+  }
+
+  public get currentTopTool(): typeof Vue|null{
+    switch(this.currentTab){
+      case "animations":
+        return AnimationTopTool;
+      default:
+        return null;
+    }
   }
 }
 </script>

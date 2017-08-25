@@ -14,11 +14,20 @@ export default class HorizontalGridGenerator{
 
     public _scale:number = 1;
 
+    private minScale = 0.01;
+
+    private maxScale = 10;
+
+    public get timelineWidth():number{
+        return this.timeToLeft(this.maxMoment);
+    }
+
     public get scale():number{
         return this._scale;
     }
     
     public set scale(val:number){
+        val = Math.max(this.minScale,Math.min(val,this.maxScale));
         this._scale = val;
         this._update();
     }
@@ -30,7 +39,7 @@ export default class HorizontalGridGenerator{
     private _update():void{
         this.horizontalGrid.splice(0,this.horizontalGrid.length);
         let current = this.timeToLeft(this.startFrom/this.scale);
-        while(this.maxMoment > current){
+        while(this.timeToLeft(this.maxMoment) >= current){
             let importance = 0;
             const time = this.leftToTime(current);
             if(time === 0){

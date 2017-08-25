@@ -1,6 +1,6 @@
 <template>
   <div class="component-root-dev-tool-all-view-root">
-    <ToolHeader @selectedTabChanged="selectedTabChanged"/>
+    <ToolHeader @selectedTabChanged="selectedTabChanged" :currentTab="currentTab"/>
     <ToolBody :currentTab="currentTab"/>
   </div>
 </template>

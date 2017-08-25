@@ -16,6 +16,10 @@ export default class AnimationTimelineHeaderCtrl extends Vue {
         });
     }
 
+    public get timeSeekerLeft():number{
+        return this.gridGenerator.timeToLeft(this.$store.state.currentTime);
+    }
+
     public get horizontalDividers(){
         return this.gridGenerator.horizontalGrid;
     }
