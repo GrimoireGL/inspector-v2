@@ -13,6 +13,8 @@ export default class AnimationTimelineCtrl extends Vue {
     @Prop()
     public scrollLeft:number;
 
+    private selectedIndex:number = -1;
+
     public mounted():void{
         this.$watch(()=>this.scrollLeft,()=>{
             (this.$refs.scrollTarget as HTMLDivElement).scrollLeft = this.scrollLeft;
@@ -42,8 +44,8 @@ export default class AnimationTimelineCtrl extends Vue {
         return this.gridGenerator.timelineWidth;
     }
 
-    public get timelineByName():{[key:string]:number[]}{
-        return this.$store.getters.timelineByName;
+    public get timeArrayByName():{[key:string]:number[]}{
+        return this.$store.getters.timeArrayByName;
     }
 
     public get alignedAnimation():IAlignedTimeline{
@@ -56,16 +58,15 @@ export default class AnimationTimelineCtrl extends Vue {
         return this.gridGenerator.horizontalGrid;
     }
 
-    public get verticalSelectionBottom(){
-        return this.$store.state.verticalSelectionBottom;
-    }
-
-    public get verticalSelectionTop(){
-        return this.$store.state.verticalSelectionTop;
-    }
-
     public onScroll(e:MouseWheelEvent):void{
         this.$emit("timeline-scroll",(this.$refs.scrollTarget as HTMLDivElement).scrollLeft);
+    }
+
+    public doubleClickKeyFrame(id:string,index:number):void{
+        this.selectedIndex = index;
+        this.$store.commit("setTime",{
+            time:this.timeArrayByName[id][index]
+        });
     }
 
     public getHeight(t:IAnimationTimeline):number{

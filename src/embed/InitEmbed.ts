@@ -4,6 +4,7 @@ import SingleNodeSocketFilter from "./socket/SingleNodeSocketFilter";
 import TreeStructureObserver from "./observer/TreeStructureObserver";
 import NodeObserver from "./observer/NodeObserver";
 import GomlRootObserver from "./observer/GomlRootObserver";
+import AnimationObserver from "./observer/AnimationObserver";
 export default class InitEmbed {
     public static init(socket: ISocket): void {
         const gr = (window as GrimoireWindow).GrimoireJS;
@@ -11,6 +12,7 @@ export default class InitEmbed {
         const goml = new TreeStructureObserver(esns);
         const node = new NodeObserver(esns, gr);
         const gro = new GomlRootObserver(socket, gr);
+        const animation = new AnimationObserver(socket,gr);
         gro.notifyGomlNodes();
     }
 }

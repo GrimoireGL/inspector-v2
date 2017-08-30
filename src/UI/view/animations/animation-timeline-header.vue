@@ -1,26 +1,30 @@
 <template>
-    <div class="component-root-animation-timeline-header">
-        <div class="scroll-root" ref="scrollTarget" @scroll="onScroll">
-            <div class="horizontal-grid-container">
-                <div v-for="(h,index) in horizontalDividers" :key="h.left" :style="{left:h.left+'px'}" :class="['horizontal-divider','importance-' + h.importance]">
-                    <p v-if="h.importance >= 1" :class="'importance-' + h.importance">{{h.label}}</p>
-                </div>
-            </div>
-            <div class="time-arrow-section" :style="{left:timeSeekerLeft+'px'}">
-                <div class="time-arrow-root">
-                    <div class="time-arrow-body"></div>
-                    <div class="time-arrow-head" />
-                </div>
-            </div>
+    <div class="component-root-animation-timeline-header-wrap">
+        <div class="mouse-move-detector" v-if="holdingSeeker" @mouseup="onSeekerMouseUp" @mousemove="onSeekerMouseMove">
         </div>
-        <div class="control-root">
-            <p @click="onPlusClick">
-                <i class="fa fa-fw fa-search-plus" />
-            </p>
-            <p>{{scaleLabel}}</p>
-            <p @click="onMinusClick">
-                <i class="fa fa-fw fa-search-minus" />
-            </p>
+        <div class="component-root-animation-timeline-header">
+            <div class="scroll-root" ref="scrollTarget" @scroll="onScroll">
+                <div class="horizontal-grid-container">
+                    <div v-for="(h,index) in horizontalDividers" :key="h.left" :style="{left:h.left+'px'}" :class="['horizontal-divider','importance-' + h.importance]">
+                        <p v-if="h.importance >= 1" :class="'importance-' + h.importance">{{h.label}}</p>
+                    </div>
+                </div>
+                <div class="time-arrow-section" :style="{left:timeSeekerLeft+'px'}" @mousedown="onSeekerMouseDown">
+                    <div class="time-arrow-root">
+                        <div class="time-arrow-body"></div>
+                        <div class="time-arrow-head" />
+                    </div>
+                </div>
+            </div>
+            <div class="control-root">
+                <p @click="onPlusClick">
+                    <i class="fa fa-fw fa-search-plus" />
+                </p>
+                <p>{{scaleLabel}}</p>
+                <p @click="onMinusClick">
+                    <i class="fa fa-fw fa-search-minus" />
+                </p>
+            </div>
         </div>
     </div>
 </template>
@@ -38,7 +42,7 @@
         background-color $col("seekbar")
     &:hover>div
         background-color $col("seekbar","darker")
-        cursor pointer
+        cursor col-resize
     .time-arrow-body
         width 15px
         height 25px
@@ -47,6 +51,11 @@
         width 11.29px
         height 11.29px
         margin-left 2px
+.component-root-animation-timeline-header-wrap
+    height 100%
+    .mouse-move-detector
+        absoluteFill()
+        z-index 10000
 .component-root-animation-timeline-header
     position relative
     height 100%

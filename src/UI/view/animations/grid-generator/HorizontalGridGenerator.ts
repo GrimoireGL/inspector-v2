@@ -56,9 +56,9 @@ export default class HorizontalGridGenerator{
 
     public toTimeLabel(time:number):string{
         if(this.defaultTimeDivisor / this._scale < 100){
-            return `${time}ms`;
+            return `${time.toFixed(2)}ms`;
         }else{
-            return `${time/1000}s`;
+            return `${(time/1000).toFixed(2)}s`;
         }
     }
 
@@ -68,6 +68,10 @@ export default class HorizontalGridGenerator{
     }
 
     public leftToTime(left:number):number{
-        return left * this.defaultTimeDivisor / this.defaultGridSize / this.scale + this.startFrom/this.scale;
+        return this.leftDeltaToTime(left) + this.startFrom/this.scale;
+    }
+
+    public leftDeltaToTime(delta:number):number{
+        return delta * this.defaultTimeDivisor / this.defaultGridSize / this.scale;
     }
 }

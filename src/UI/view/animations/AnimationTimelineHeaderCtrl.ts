@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Component from 'vue-class-component'
 import { Prop } from "vue-property-decorator";
 import HorizontalGridGenerator from "./grid-generator/HorizontalGridGenerator"
+import { WindowEvent } from "../../../common/WindowEvent";
 @Component({})
 export default class AnimationTimelineHeaderCtrl extends Vue {
 
@@ -9,6 +10,8 @@ export default class AnimationTimelineHeaderCtrl extends Vue {
 
     @Prop()
     public scrollLeft:number;
+
+    private holdingSeeker = false;
 
     public mounted():void{
         this.$watch(()=>this.scrollLeft,()=>{
@@ -38,5 +41,20 @@ export default class AnimationTimelineHeaderCtrl extends Vue {
 
     public onMinusClick():void{
         this.gridGenerator.scale /= 10;
+    }
+
+    private onSeekerMouseDown():void{
+        this.holdingSeeker = true;
+    }
+
+    private onSeekerMouseUp():void{
+        this.holdingSeeker = false;
+    }
+
+    private onSeekerMouseMove(e:MouseEvent):void{
+        let nextTime = this.$store.state.currentTime + this.gridGenerator.leftDeltaToTime(e.movementX);
+        nextTime = Math.max(nextTime,0);
+        nextTime = Math.min(nextTime,this.gridGenerator.maxMoment);
+        this.$store.commit("setTime",{time:nextTime})
     }
 }

@@ -6,7 +6,7 @@
                     <div v-for="query in alignedAnimation" class="query-margin">
                         <div v-for="component in query" class="component-margin">
                             <div v-for="attribute in component" class="attribute-margin" :style="{height:getHeight(attribute)+'px'}" :class="{selected:selectedId === getId(attribute)}">
-                                <p v-for="time in timelineByName[getId(attribute)]" class="timeline-point" :style="{left:getLeftFromTime(time)+'px'}"></p>
+                                <p v-for="(time,index) in timeArrayByName[getId(attribute)]" :class="['timeline-point',{selected:selectedIndex === index && getId(attribute) === selectedId}]" :style="{left:getLeftFromTime(time)+'px'}" @dblclick="doubleClickKeyFrame(getId(attribute),index)"></p>
                             </div>
                         </div>
                     </div>

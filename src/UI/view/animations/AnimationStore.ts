@@ -14,8 +14,6 @@ export function getId(attributeTimeline:IAnimationTimeline):string{
 const declarationStore = new Store({
     state: {
         symbols: [] as IGrimoireSymbol[],
-        verticalSelectionTop: 0,
-        verticalSelectionBottom: 0,
         attributeRects:{} as {[key:string]:{top:number,bottom:number}},
         currentTime: 150,
         animation: [
@@ -63,7 +61,7 @@ const declarationStore = new Store({
             }
             return result;
         },
-        timelineByName:state=> {
+        timeArrayByName:state=> {
             const result = {} as {[key:string]:any};
             for(let timeline of state.animation){
                 result[getId(timeline)] = timeline.timeline;
@@ -77,8 +75,6 @@ const declarationStore = new Store({
         },
         selectAttribute(state, args): void {
             state.selectedAttribute = args.attribute;
-            state.verticalSelectionBottom = args.verticalSelectionBottom;
-            state.verticalSelectionTop = args.verticalSelectionTop;
         },
         setAttributeRect(state,args):void{
             Vue.set(state.attributeRects,getId(args.attribute),{
