@@ -12,11 +12,11 @@ export default class HeaderTabs extends Vue{
     {
       header:"Declarations",
       iconClass:"fa fa-cubes"
-    }
+    },
     // },
-    // {
-    //   header:"Animations",
-    //   iconClass:"fa fa-magic"
-    // }
+    {
+      header:"Animations",
+      iconClass:"fa fa-magic"
+    }
   ];
 }
