@@ -1,26 +1,26 @@
 import ISocket from "../../common/socket/ISocket";
-import GrimoireInterfaceImpl from "grimoirejs/ref/Interface/GrimoireInterfaceImpl";
-export default class SingleNodeSocketFilter implements ISocket{
+import GrimoireInterfaceImpl from "grimoirejs/ref/Core/GrimoireInterfaceImpl";
+export default class SingleNodeSocketFilter implements ISocket {
 
-    constructor(public socket:ISocket,public gr:GrimoireInterfaceImpl){
-        
+    constructor(public socket: ISocket, public gr: GrimoireInterfaceImpl) {
+
     }
 
     public send(messageType: string, args: any): void {
-        this.socket.send(messageType,args);
+        this.socket.send(messageType, args);
     }
 
     public on(messageType: string, func: (args: Object) => void): void {
-        this.socket.on(messageType,(args:any)=>{
+        this.socket.on(messageType, (args: any) => {
             let targetRoot;
-            if(args.$rootNodeId){
+            if (args.$rootNodeId) {
                 const targetScript = this._getScriptTagFromId(args.$rootNodeId);
-                if(targetScript === null){
+                if (targetScript === null) {
                     return;
                 }
                 targetRoot = this.gr.getRootNode(targetScript);
             }
-            func(Object.assign({$targetRoot:targetRoot},args));
+            func(Object.assign({ $targetRoot: targetRoot }, args));
         });
     }
 
