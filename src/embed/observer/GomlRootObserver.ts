@@ -60,7 +60,7 @@ export default class GomlRootObserver {
             const superNode = node.superNode;
             const superNodeName = node.superNode ? node.superNode.fqn : null;
             const components = [] as string[];
-            node.requiredComponents.forEach(n => components.push(n.fqn));
+            node.defaultComponents.forEach(n => components.push(n.fqn));
             list.push({
                 fqn: fqn,
                 type: "node",
@@ -72,7 +72,7 @@ export default class GomlRootObserver {
             const attributes = [];
             for (let name in component.attributes) {
                 const attribute = component.attributes[name];
-                const converterName = Ensure.tobeNSIdentity(attribute.converter)!.fqn;
+                const converterName = Ensure.tobeCnverterIdentity(attribute.converter)!.fqn;
                 const converterType = ValueTypeRegistry.get(converterName);
                 attributes.push({
                     fqn: name,

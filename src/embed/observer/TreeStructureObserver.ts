@@ -51,7 +51,7 @@ export default class TreeStructureObserver {
                         const parent = GomlNode.fromElement(m.target as HTMLElement);
                         this.socket.send("notify-node-removed", {
                             parentId: parent.id,
-                            nodeId: element.getAttribute(Constants.x_gr_id)
+                            nodeId: element.getAttribute(Constants.X_GR_ID)
                         });
                     }
                 });
