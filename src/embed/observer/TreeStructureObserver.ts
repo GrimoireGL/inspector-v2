@@ -1,8 +1,8 @@
 import SingleNodeSocketFilter from "../socket/SingleNodeSocketFilter";
 import IGrimoireNodeMessage from "../../common/messages/IGrimoireNodeMessage"
-import GomlNode from "grimoirejs/ref/Node/GomlNode";
+import GomlNode from "grimoirejs/ref/Core/GomlNode";
 import GrimoireToViewModelConverter from "../../common/GrimoireToViewModelConverter";
-import Constants from "grimoirejs/ref/Base/Constants";
+import Constants from "grimoirejs/ref/Core/Constants";
 export default class TreeStructureObserver {
     private _currentTargetRoot: GomlNode | null;
 
@@ -51,7 +51,7 @@ export default class TreeStructureObserver {
                         const parent = GomlNode.fromElement(m.target as HTMLElement);
                         this.socket.send("notify-node-removed", {
                             parentId: parent.id,
-                            nodeId:element.getAttribute(Constants.x_gr_id)
+                            nodeId: element.getAttribute(Constants.X_GR_ID)
                         });
                     }
                 });

@@ -1,8 +1,8 @@
 import ISocket from "../../common/socket/ISocket";
-import GrimoireInterfaceImpl from "grimoirejs/ref/Interface/GrimoireInterfaceImpl";
+import GrimoireInterfaceImpl from "grimoirejs/ref/Core/GrimoireInterfaceImpl";
 import ElementHighlighter from "../ElementHighlighter";
-import IGrimoireSymbol, { INodeDeclaration,IComponentDeclaration } from "../../UI/view/declarations/IGrimoireSymbol";
-import Ensure from "grimoirejs/ref/Base/Ensure";
+import IGrimoireSymbol, { INodeDeclaration, IComponentDeclaration } from "../../UI/view/declarations/IGrimoireSymbol";
+import Ensure from "grimoirejs/ref/Tool/Ensure";
 import ValueTypeRegistry from "../../common/ValueTypeRegistry";
 export default class GomlRootObserver {
     constructor(public socket: ISocket, public gr: GrimoireInterfaceImpl) {
@@ -12,11 +12,11 @@ export default class GomlRootObserver {
         socket.on("fetch-declarations", (args: any) => {
             this.notifyDeclarations();
         });
-        socket.on("check-plugin-existence",(args:any)=>{
+        socket.on("check-plugin-existence", (args: any) => {
             const plugin = this.gr.lib[args.pluginName];
-            if(plugin){
-                socket.send("notify-plugin-existence",{
-                    pluginName:args.pluginName
+            if (plugin) {
+                socket.send("notify-plugin-existence", {
+                    pluginName: args.pluginName
                 });
             }
         });
@@ -47,42 +47,42 @@ export default class GomlRootObserver {
         const list = [] as IGrimoireSymbol[];
         list.push({
             fqn: `grimoirejs@${(this.gr as any)["__VERSION__"]}`,
-            type:"plugin"
+            type: "plugin"
         });
-        for(let key in this.gr.lib){
+        for (let key in this.gr.lib) {
             const lib = this.gr.lib[key];
             list.push({
-                fqn:`${lib.__NAME__}@${lib.__VERSION__}`,
-                type:"plugin"
+                fqn: `${lib.__NAME__}@${lib.__VERSION__}`,
+                type: "plugin"
             });
         }
         this.gr.nodeDeclarations.forEach((node, fqn) => {
             const superNode = node.superNode;
             const superNodeName = node.superNode ? node.superNode.fqn : null;
             const components = [] as string[];
-            node.defaultComponents.forEach(n=>components.push(n.fqn));
+            node.defaultComponents.forEach(n => components.push(n.fqn));
             list.push({
                 fqn: fqn,
                 type: "node",
-                defaultComponents:components,
-                extendsFrom:superNodeName
+                defaultComponents: components,
+                extendsFrom: superNodeName
             } as INodeDeclaration);
         });
         this.gr.componentDeclarations.forEach((component, fqn) => {
             const attributes = [];
-            for(let name in component.attributes){
+            for (let name in component.attributes) {
                 const attribute = component.attributes[name];
-                const converterName = Ensure.tobeNSIdentity(attribute.converter)!.fqn;
+                const converterName = Ensure.tobeCnverterIdentity(attribute.converter)!.fqn;
                 const converterType = ValueTypeRegistry.get(converterName);
                 attributes.push({
-                    fqn:name,
-                    converter:converterName
+                    fqn: name,
+                    converter: converterName
                 });
             }
             list.push({
                 fqn: fqn,
                 type: "component",
-                defaultAttributes:attributes
+                defaultAttributes: attributes
             } as IComponentDeclaration);
         });
         this.gr.converters.forEach((node, fqn) => {
@@ -91,7 +91,7 @@ export default class GomlRootObserver {
                 type: "converter"
             });
         });
-        this.socket.send("notify-declarations",{declarations:list});
+        this.socket.send("notify-declarations", { declarations: list });
     }
 
     private _registerCanvasHiglighter(): void {

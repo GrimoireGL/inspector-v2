@@ -1,10 +1,10 @@
 import ISocket from "../../common/socket/ISocket";
-import GrimoireInterfaceImpl from "grimoirejs/ref/Interface/GrimoireInterfaceImpl";
+import GrimoireInterfaceImpl from "grimoirejs/ref/Core/GrimoireInterfaceImpl";
 import IGrimoireNodeMessage from "../../common/messages/IGrimoireNodeMessage";
 import GrimoireToViewModelConverter from "../../common/GrimoireToViewModelConverter";
-import GomlNode from "grimoirejs/ref/Node/GomlNode";
-import Component from "grimoirejs/ref/Node/Component";
-import Attribute from "grimoirejs/ref/Node/Attribute";
+import GomlNode from "grimoirejs/ref/Core/GomlNode";
+import Component from "grimoirejs/ref/Core/Component";
+import Attribute from "grimoirejs/ref/Core/Attribute";
 import InspectionData from "../../UI/view/inspector/InspectionData";
 import { IChangedAttribute } from "../../common/messages/IAttributeNotifyMessage"
 export default class NodeObserver {
@@ -63,7 +63,7 @@ export default class NodeObserver {
         const components = this._currentNode.getComponents(Component);
         for (let c of components) {
             c.attributes.forEach((attribute) => {
-                attribute.watch(this._onAttributeChange,false,true);
+                attribute.watch(this._onAttributeChange, false, true);
                 this._watchingAttributes!.push(attribute);
             });
         }
